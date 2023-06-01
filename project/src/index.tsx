@@ -7,30 +7,31 @@ import { AddReviewPage } from './pages/AddReviewPage';
 import { Player } from './components/Player';
 import { Login } from './pages/Login';
 import { films } from './mocks/films';
+import { APP_ROUTE } from './constants';
 
 const router = createBrowserRouter([
   {
-    path: '*',
+    path: APP_ROUTE.NotFound,
     element: <NotFoundPage />,
   },
   {
-    path: '/',
+    path: APP_ROUTE.Root,
     element: <MainPage films={films} />,
   },
   {
-    path: '/login',
+    path: APP_ROUTE.Login,
     element: <Login />,
   },
   {
-    path: '/films/:id',
+    path: APP_ROUTE.Film,
     element: <FilmDetailsPage />,
   },
   {
-    path: '/films/:id/review',
+    path: APP_ROUTE.Review,
     element: <AddReviewPage />,
   },
   {
-    path: '/player/:id',
+    path: APP_ROUTE.Player,
     element: <Player />,
   },
 ]);
