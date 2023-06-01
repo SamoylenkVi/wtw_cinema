@@ -6,8 +6,9 @@ import { FilmDetailsPage } from './pages/FilmDetailsPage';
 import { AddReviewPage } from './pages/AddReviewPage';
 import { Player } from './components/Player';
 import { Login } from './pages/Login';
+import { PrivateRouter } from './components/PrivateRoute';
 import { films } from './mocks/films';
-import { APP_ROUTE } from './constants';
+import { APP_ROUTE, AUTHORIZATION_STATUS } from './constants';
 
 const router = createBrowserRouter([
   {
@@ -24,7 +25,10 @@ const router = createBrowserRouter([
   },
   {
     path: APP_ROUTE.Film,
-    element: <FilmDetailsPage />,
+    element:
+    <PrivateRouter authorizationStatus= {AUTHORIZATION_STATUS.Auth}>
+      <FilmDetailsPage />
+    </PrivateRouter>,
   },
   {
     path: APP_ROUTE.Review,
@@ -32,7 +36,10 @@ const router = createBrowserRouter([
   },
   {
     path: APP_ROUTE.Player,
-    element: <Player />,
+    element:
+    <PrivateRouter authorizationStatus= {AUTHORIZATION_STATUS.NoAuth}>
+      <Player/>
+    </PrivateRouter>,
   },
 ]);
 
