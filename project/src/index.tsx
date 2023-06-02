@@ -1,3 +1,4 @@
+import { HelmetProvider } from 'react-helmet-async';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
 import { MainPage } from './pages/MainPage';
@@ -46,6 +47,8 @@ const router = createBrowserRouter([
 const root = document.getElementById('root');
 if (root){
   ReactDOM.createRoot(root as HTMLDivElement).render(
-    <RouterProvider router={router} />,
+    <HelmetProvider>
+      <RouterProvider router={router} />,
+    </HelmetProvider>
   );
 }

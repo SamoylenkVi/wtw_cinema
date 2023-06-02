@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import { Link, useParams } from 'react-router-dom';
 import { Footer } from '../../components/Footer/index';
 import { films } from '../../mocks/films';
@@ -26,6 +27,9 @@ export const FilmDetailsPage = () => {
   return (
     <>
       <section className="film-card film-card--full">
+        <Helmet>
+          <title>{name}</title>
+        </Helmet>
         <div className="film-card__hero">
           <div className="film-card__bg">
             <img src={previewImage} alt={altText} />
