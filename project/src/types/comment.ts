@@ -1,9 +1,7 @@
+import { User } from './user';
 export type Comment = {
   id: number;
-  user: {
-      id: number;
-      name: string;
-  };
+  user: User;
   rating: number;
   commentText: string;
   date: Date;

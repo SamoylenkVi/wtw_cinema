@@ -22,9 +22,8 @@ export const FilmList = ({ films }:FilmListProps) => {
   return (
     <>
       <div className="catalog__films-list">
-        {Array.from(
-          { length: films.length},
-          (_, index) => (
+        {
+          films.map((_, index) => (
             <FilmCard
               key={films[index].id}
               name = {films[index].name}
@@ -33,8 +32,8 @@ export const FilmList = ({ films }:FilmListProps) => {
               id = {films[index].id}
               onMouseEnter={handleMouseEnter}
             />
-          ),
-        )}
+          ))
+        }
       </div>
 
       <div className="catalog__more">

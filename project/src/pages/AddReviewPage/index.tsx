@@ -1,6 +1,6 @@
 import { Link, useParams } from 'react-router-dom';
 import { REGEX_ALT } from '../../constants';
-import { createAltText } from '../../utils/FilmCard';
+import { createAltText } from '../../utils/createAltText';
 import { AddReviewForm } from '../../components/AddReviewForm';
 import { films } from '../../mocks/films';
 import { Logo } from '../../components/Logo';

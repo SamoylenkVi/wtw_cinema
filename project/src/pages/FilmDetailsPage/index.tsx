@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { Footer } from '../../components/Footer/index';
 import { films } from '../../mocks/films';
 import { REGEX_ALT } from '../../constants';
-import { createAltText } from '../../utils/FilmCard';
+import { createAltText } from '../../utils/createAltText';
 import { FilmCard } from '../../components/FilmCard/index';
 import { DetailsNavigation } from '../../components/DetailsNavigation/index';
 import { findSimilarFilms } from './helper';
@@ -74,7 +74,9 @@ export const FilmDetailsPage = () => {
                   </svg>
                   <span>My list</span>
                 </button>
-                {(id) ? <Link to={`/films/${id}/review`} className="btn film-card__button">Add review</Link> : ''}
+                {(id !== undefined) && (
+                  <Link to={`/films/${id}/review`} className="btn film-card__button">Add review</Link>
+                )}
               </div>
             </div>
           </div>

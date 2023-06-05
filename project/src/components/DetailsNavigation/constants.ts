@@ -3,3 +3,6 @@ export const NAVIGATION_BUTTONS = {
   DETAILS: 'details',
   REVIEWS: 'reviews',
 } as const;
+
+type key = keyof typeof NAVIGATION_BUTTONS
+export type NavigationButtonsType = typeof NAVIGATION_BUTTONS[key];

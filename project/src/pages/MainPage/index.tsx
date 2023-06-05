@@ -1,20 +1,7 @@
 import { FilmCardMain } from '../../components/FilmCardMain';
 import { FilmList } from '../../components/FilmList';
 import { Footer } from '../../components/Footer';
-
-type Film = {
-  id: string;
-  name: string;
-  posterImage: string;
-  previewImage: string;
-  backgroundImage: string;
-  backgroundColor: string;
-  videoLink: string;
-  previewVideoLink: string;
-  description: string;
-  rating: number;
-  isFavorite: boolean;
-}
+import { Film } from '../../types/film';
 
 type MainPageProps = {
   films: Film[];

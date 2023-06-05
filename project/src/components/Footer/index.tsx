@@ -1,3 +1,5 @@
+import { CURRENT_YEAR } from '../../constants';
+
 export const Footer = () => (
   <footer className="page-footer">
     <div className="logo">
@@ -9,7 +11,7 @@ export const Footer = () => (
     </div>
 
     <div className="copyright">
-      <p>© 2019 What to watch Ltd.</p>
+      <p>© {CURRENT_YEAR} What to watch Ltd.</p>
     </div>
   </footer>
 );

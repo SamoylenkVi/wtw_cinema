@@ -1,5 +1,5 @@
-import { formatData } from './helper';
-import { DATA_FORMAT_TEXT, DATA_FORMAT_ATTRIBUTE } from './constants';
+import { formatData } from '../../utils/date';
+import { DATA_FORMAT_ATTRIBUTE, DATA_FORMAT_TEXT } from '../../constants';
 import { Comment } from '../../types/comment';
 
 type FilmReviewProps = {

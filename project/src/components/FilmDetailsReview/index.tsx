@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import { FilmReview } from '../FilmReview/index';
 import { Comment } from '../../types/comment';

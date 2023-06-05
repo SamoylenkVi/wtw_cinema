@@ -1,6 +1,11 @@
+import { default as dayjs } from 'dayjs';
+
 export const FILM_CARD_COUNT = 8;
 export const REGEX_ALT = /(?<=img\/).+(?=\.)/gm;
 export const RATING_FILM = 10;
+export const CURRENT_YEAR = dayjs().year() ;
+export const DATA_FORMAT_TEXT = 'MMMM D, YYYY';
+export const DATA_FORMAT_ATTRIBUTE = 'YYYY-MM-DD';
 
 export const APP_ROUTE = {
   Root: '/',
@@ -16,3 +21,7 @@ export const AUTHORIZATION_STATUS = {
   NoAuth: 'NO_AUTH',
   Unknown: 'UNKNOWN',
 } as const;
+
+
+type key = keyof typeof AUTHORIZATION_STATUS
+export type AuthorizationStatusType = typeof AUTHORIZATION_STATUS[key];

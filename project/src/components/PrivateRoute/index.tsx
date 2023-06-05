@@ -1,8 +1,8 @@
 import { Navigate } from 'react-router';
-import { AUTHORIZATION_STATUS, APP_ROUTE } from '../../constants';
+import { AUTHORIZATION_STATUS, APP_ROUTE, AuthorizationStatusType } from '../../constants';
 
 type PrivateRouteProps = {
-  authorizationStatus: 'AUTH' | 'NO_AUTH' | 'UNKNOWN';
+  authorizationStatus: AuthorizationStatusType;
   children: JSX.Element;
 }
 

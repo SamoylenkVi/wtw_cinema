@@ -4,7 +4,7 @@ import {
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import { REGEX_ALT } from '../../constants';
-import { createAltText } from '../../utils/FilmCard';
+import { createAltText } from '../../utils/createAltText';
 import { VideoPlayer} from '../VideoPlayer';
 
 
