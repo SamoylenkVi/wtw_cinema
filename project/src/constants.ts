@@ -6,11 +6,12 @@ export const RATING_FILM = 10;
 export const CURRENT_YEAR = dayjs().year() ;
 export const DATA_FORMAT_TEXT = 'MMMM D, YYYY';
 export const DATA_FORMAT_ATTRIBUTE = 'YYYY-MM-DD';
+export const DEFAULT_FILM_DETAILS_INFORMATION = 'details';
 
 export const APP_ROUTE = {
   Root: '/',
   Login: '/login',
-  Film: '/films/:id',
+  Film: '/films/:id/:currentInformation',
   Review: '/films/:id/review',
   Player: '/player/:id',
   NotFound: '*'

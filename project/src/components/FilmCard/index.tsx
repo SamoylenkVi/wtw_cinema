@@ -3,7 +3,7 @@ import {
 } from 'react';
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
-import { REGEX_ALT } from '../../constants';
+import { REGEX_ALT, DEFAULT_FILM_DETAILS_INFORMATION } from '../../constants';
 import { createAltText } from '../../utils/createAltText';
 import { VideoPlayer} from '../VideoPlayer';
 
@@ -54,7 +54,7 @@ export const FilmCard = ({
       </div>
       <h3 className="small-film-card__title">
         <Link
-          to={`/films/${id}`}
+          to={`/films/${id}/${DEFAULT_FILM_DETAILS_INFORMATION}`}
           className={cn('small-film-card__link', { 'small-film-card__link-video': isVideo })}
         >
           {name}

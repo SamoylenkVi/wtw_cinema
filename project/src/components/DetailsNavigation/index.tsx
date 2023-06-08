@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate, useParams, generatePath} from 'react-router-dom';
 import cn from 'classnames';
 import { NAVIGATION_BUTTONS, NavigationButtonsType } from './constants';
 import { capitalizeFirstLetter } from './helper';
@@ -9,20 +10,32 @@ type DetailsNavigationProps = {
   film: Film;
 }
 
+
 export const DetailsNavigation = ({ film }:DetailsNavigationProps) => {
-  const [currentButton, setCurrentButton] = useState<NavigationButtonsType>(NAVIGATION_BUTTONS.DETAILS);
+
+  const {id, currentInformation} = useParams();
+  const navigate = useNavigate();
+
+  const [currentButton, setCurrentButton] = useState<NavigationButtonsType>(currentInformation as NavigationButtonsType);
+
 
   const handlerActiveButton = (evt: React.MouseEvent<HTMLButtonElement>) => {
     const target = evt.target as HTMLButtonElement;
     const buttonName = target.getAttribute('data-name');
 
-    if (buttonName) {
+    if (buttonName && id) {
       if (
         Object
           .values(NAVIGATION_BUTTONS)
           .includes(buttonName as NavigationButtonsType)
       ) {
         setCurrentButton(buttonName as NavigationButtonsType);
+
+        const path = generatePath('/films/:id/:currentInformation', {
+          id: id,
+          currentInformation: buttonName,
+        });
+        navigate(path, {replace: true});
       }
     }
   };
