@@ -13,10 +13,11 @@ type DetailsNavigationProps = {
 
 export const DetailsNavigation = ({ film }:DetailsNavigationProps) => {
 
-  const {id, currentInformation} = useParams();
+  const {id} = useParams();
+  const {currentInformation} = useParams();
   const navigate = useNavigate();
 
-  const [currentButton, setCurrentButton] = useState<NavigationButtonsType>(currentInformation as NavigationButtonsType);
+  const [, setCurrentButton] = useState<NavigationButtonsType>(currentInformation as NavigationButtonsType);
 
 
   const handlerActiveButton = (evt: React.MouseEvent<HTMLButtonElement>) => {
@@ -49,7 +50,7 @@ export const DetailsNavigation = ({ film }:DetailsNavigationProps) => {
               <button
                 data-name={button}
                 onClick={handlerActiveButton}
-                className={cn('film-nav__link', { 'film-nav__link--active': currentButton === button })}
+                className={cn('film-nav__link', { 'film-nav__link--active': currentInformation === button })}
               >
                 {capitalizeFirstLetter(button)}
               </button>
@@ -57,7 +58,7 @@ export const DetailsNavigation = ({ film }:DetailsNavigationProps) => {
           ))}
         </ul>
       </nav>
-      <FilmDetailsContent film={film} state={currentButton} />
+      {currentInformation && <FilmDetailsContent film={film} state={currentInformation} /> }
     </>
   );
 };

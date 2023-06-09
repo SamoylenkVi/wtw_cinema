@@ -89,7 +89,7 @@ export const FilmDetailsPage = () => {
             </div>
 
             <div className="film-card__desc">
-              <DetailsNavigation film={film}/>
+              <DetailsNavigation film={film} />
             </div>
           </div>
         </div>

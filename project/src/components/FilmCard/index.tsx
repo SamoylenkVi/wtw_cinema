@@ -1,5 +1,5 @@
 import {
-  useState, useRef,
+  useState, useRef, useEffect,
 } from 'react';
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
@@ -31,25 +31,32 @@ export const FilmCard = ({
       onMouseEnter(id);
     }
     setIsVideo(true);
-
-    if (isVideo && videoRef.current) {
-      setIsVideoError(false);
-
-      videoRef.current.play().catch(() => {
-        setIsVideoError(true);
-      });
-    }
   };
 
   const stopVideo = () => {
     setIsVideo(false);
   };
 
+  useEffect(() => {
+    const interval = setTimeout(() => {
+      if (isVideo && videoRef.current) {
+        setIsVideoError(false);
+
+        videoRef.current.play()
+          .catch(() => {
+            setIsVideoError(true);
+          });
+      }
+    }, 1000);
+
+    return () => clearTimeout(interval);
+  }, [isVideo]);
+
   return (
     <article onMouseEnter={playVideo} onMouseLeave={stopVideo} className="small-film-card catalog__films-card">
       <div className="small-film-card__image">
         {(isVideo && !isVideoError)
-          ? <VideoPlayer src={previewVideoLink} ref={videoRef} />
+          ? <VideoPlayer src={previewVideoLink} ref={videoRef} poster={previewImage}/>
           : <img src={previewImage} alt={altText} width="280" height="175" />}
       </div>
       <h3 className="small-film-card__title">
