@@ -3,7 +3,7 @@ import { Film } from '../types/film';
 
 export const films: Film[] = [
   {
-    id: '1',
+    id: nanoid(),
     name: 'The Grand Budapest Hotel',
     posterImage: 'img/dardjeeling-limited.jpg',
     previewImage: 'img/dardjeeling-limited.jpg',

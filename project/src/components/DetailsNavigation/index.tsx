@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate, useParams, generatePath} from 'react-router-dom';
 import cn from 'classnames';
 import { NAVIGATION_BUTTONS, NavigationButtonsType } from './constants';
+import { APP_ROUTE } from '../../constants';
 import { capitalizeFirstLetter } from './helper';
 import { FilmDetailsContent } from '../FilmDetailsContent';
 import {Film} from '../../types/film';
@@ -13,8 +14,7 @@ type DetailsNavigationProps = {
 
 export const DetailsNavigation = ({ film }:DetailsNavigationProps) => {
 
-  const {id} = useParams();
-  const {currentInformation} = useParams();
+  const {id, currentInformation} = useParams();
   const navigate = useNavigate();
 
   const [, setCurrentButton] = useState<NavigationButtonsType>(currentInformation as NavigationButtonsType);
@@ -32,7 +32,7 @@ export const DetailsNavigation = ({ film }:DetailsNavigationProps) => {
       ) {
         setCurrentButton(buttonName as NavigationButtonsType);
 
-        const path = generatePath('/films/:id/:currentInformation', {
+        const path = generatePath(APP_ROUTE.Film, {
           id: id,
           currentInformation: buttonName,
         });
