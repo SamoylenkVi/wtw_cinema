@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { useNavigate, useParams, generatePath} from 'react-router-dom';
 import cn from 'classnames';
 import { NAVIGATION_BUTTONS, NavigationButtonsType } from './constants';
+import { APP_ROUTE } from '../../constants';
 import { capitalizeFirstLetter } from './helper';
 import { FilmDetailsContent } from '../FilmDetailsContent';
 import {Film} from '../../types/film';
@@ -9,20 +11,32 @@ type DetailsNavigationProps = {
   film: Film;
 }
 
+
 export const DetailsNavigation = ({ film }:DetailsNavigationProps) => {
-  const [currentButton, setCurrentButton] = useState<NavigationButtonsType>(NAVIGATION_BUTTONS.DETAILS);
+
+  const {id, currentInformation} = useParams();
+  const navigate = useNavigate();
+
+  const [, setCurrentButton] = useState<NavigationButtonsType>(currentInformation as NavigationButtonsType);
+
 
   const handlerActiveButton = (evt: React.MouseEvent<HTMLButtonElement>) => {
     const target = evt.target as HTMLButtonElement;
     const buttonName = target.getAttribute('data-name');
 
-    if (buttonName) {
+    if (buttonName && id) {
       if (
         Object
           .values(NAVIGATION_BUTTONS)
           .includes(buttonName as NavigationButtonsType)
       ) {
         setCurrentButton(buttonName as NavigationButtonsType);
+
+        const path = generatePath(APP_ROUTE.Film, {
+          id: id,
+          currentInformation: buttonName,
+        });
+        navigate(path, {replace: true});
       }
     }
   };
@@ -36,7 +50,7 @@ export const DetailsNavigation = ({ film }:DetailsNavigationProps) => {
               <button
                 data-name={button}
                 onClick={handlerActiveButton}
-                className={cn('film-nav__link', { 'film-nav__link--active': currentButton === button })}
+                className={cn('film-nav__link', { 'film-nav__link--active': currentInformation === button })}
               >
                 {capitalizeFirstLetter(button)}
               </button>
@@ -44,7 +58,7 @@ export const DetailsNavigation = ({ film }:DetailsNavigationProps) => {
           ))}
         </ul>
       </nav>
-      <FilmDetailsContent film={film} state={currentButton} />
+      {currentInformation && <FilmDetailsContent film={film} state={currentInformation} /> }
     </>
   );
 };

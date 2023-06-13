@@ -2,15 +2,16 @@ import { forwardRef } from 'react';
 
 type VideoPlayerProps = {
   src: string;
+  poster: string;
 }
 
 
-export const VideoPlayer = forwardRef<HTMLVideoElement, VideoPlayerProps>(({ src }, ref) => (
+export const VideoPlayer = forwardRef<HTMLVideoElement, VideoPlayerProps>(({ src, poster}, ref) => (
   <video
     className="player__video"
     muted
-    autoPlay
     ref={ref}
+    poster={poster}
   >
     <source src={src} type="video/mp4" />
   </video>
