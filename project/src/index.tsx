@@ -1,6 +1,8 @@
+import {Provider} from 'react-redux';
 import { HelmetProvider } from 'react-helmet-async';
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
+import { store } from './store/store';
 import { MainPage } from './pages/MainPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { FilmDetailsPage } from './pages/FilmDetailsPage';
@@ -61,7 +63,9 @@ const root = document.getElementById('root');
 if (root){
   ReactDOM.createRoot(root as HTMLDivElement).render(
     <HelmetProvider>
-      <RouterProvider router={router} />,
+      <Provider store={store}>
+        <RouterProvider router={router} />,
+      </Provider>
     </HelmetProvider>
   );
 }
