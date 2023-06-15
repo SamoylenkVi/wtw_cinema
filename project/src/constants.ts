@@ -7,6 +7,7 @@ export const CURRENT_YEAR = dayjs().year() ;
 export const DATA_FORMAT_TEXT = 'MMMM D, YYYY';
 export const DATA_FORMAT_ATTRIBUTE = 'YYYY-MM-DD';
 export const DEFAULT_FILM_DETAILS_INFORMATION = 'details';
+export const DEFAULT_GENRE = 'All genres';
 
 export const APP_ROUTE = {
   Root: '/',
