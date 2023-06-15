@@ -1,3 +1,4 @@
 import {createAction} from '@reduxjs/toolkit';
+import {Film} from '../types/film';
 
-export const changeGenre = createAction('changeGenre');
+export const addFilms = createAction<Film[], 'films/addFilms'>('films/addFilms');

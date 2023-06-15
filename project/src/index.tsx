@@ -13,6 +13,7 @@ import { PrivateRouter } from './components/PrivateRoute';
 import ScrollToTop from './components/ScrollToTop';
 import { films } from './mocks/films';
 import { APP_ROUTE, AUTHORIZATION_STATUS } from './constants';
+import {addFilms} from './store/action';
 
 const ScrollToTopLayout = () => (
   <>
@@ -69,3 +70,6 @@ if (root){
     </HelmetProvider>
   );
 }
+
+// TODO remove with mocked films
+store.dispatch(addFilms(films));
