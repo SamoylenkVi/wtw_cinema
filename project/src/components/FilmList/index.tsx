@@ -1,19 +1,24 @@
 import { useState } from 'react';
+import {useLocation} from 'react-router-dom';
 import { FilmCard } from '../FilmCard/index';
+import { DEFAULT_GENRE } from '../../constants';
+import { useAppSelector} from '../../hooks';
 
-type Film = {
-  id: string;
-  name: string;
-  previewImage: string;
-  previewVideoLink: string;
-}
 
-type FilmListProps = {
-  films: Film[];
-}
-
-export const FilmList = ({ films }:FilmListProps) => {
+export const FilmList = () => {
+  let films = useAppSelector((state) => state.films);
   const [, setActiveCardId] = useState('');
+  const search = useLocation().search;
+  const genreParams = new URLSearchParams(search).get('genre');
+
+
+  if (genreParams) {
+    films = genreParams === DEFAULT_GENRE
+      ?
+      films
+      :
+      films.filter((film) => film.genre === genreParams);
+  }
 
   const handleMouseEnter = (id:string) => {
     setActiveCardId(id);

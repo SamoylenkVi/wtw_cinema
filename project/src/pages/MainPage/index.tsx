@@ -27,7 +27,7 @@ export const MainPage = ({films}: MainPageProps) => (
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
         <GenresList></GenresList>
-        <FilmList films={films} />
+        <FilmList />
       </section>
       <Footer />
     </div>
