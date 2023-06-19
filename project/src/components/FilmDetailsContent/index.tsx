@@ -1,4 +1,4 @@
-import { comments } from '../../mocks/comments';
+import { comments } from '../../mock-server/comments';
 import { FilmDetailsOverview } from '../FilmDetailsOverview/index';
 import { FilmDetailsInformation } from '../FilmDetailsInformation/index';
 import { FilmDetailsReview } from '../FilmDetailsReview/index';

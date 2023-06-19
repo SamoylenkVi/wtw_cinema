@@ -18,6 +18,11 @@ export const APP_ROUTE = {
   NotFound: '*'
 } as const;
 
+export const API_ROUTE = {
+  Films: '/films',
+  Comments: '/comments',
+};
+
 export const AUTHORIZATION_STATUS = {
   Auth: 'AUTH',
   NoAuth: 'NO_AUTH',

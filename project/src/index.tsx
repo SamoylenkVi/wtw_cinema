@@ -11,9 +11,8 @@ import { Player } from './components/Player';
 import { Login } from './pages/Login';
 import { PrivateRouter } from './components/PrivateRoute';
 import ScrollToTop from './components/ScrollToTop';
-import { films } from './mocks/films';
 import { APP_ROUTE, AUTHORIZATION_STATUS } from './constants';
-import {addFilms} from './store/action';
+
 
 const ScrollToTopLayout = () => (
   <>
@@ -32,7 +31,7 @@ const router = createBrowserRouter([
       },
       {
         path: APP_ROUTE.Root,
-        element: <MainPage films={films} />,
+        element: <MainPage />,
       },
       {
         path: APP_ROUTE.Login,
@@ -65,11 +64,8 @@ if (root){
   ReactDOM.createRoot(root as HTMLDivElement).render(
     <HelmetProvider>
       <Provider store={store}>
-        <RouterProvider router={router} />,
+        <RouterProvider router={router} />
       </Provider>
     </HelmetProvider>
   );
 }
-
-// TODO remove with mocked films
-store.dispatch(addFilms(films));

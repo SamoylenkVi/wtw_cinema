@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { Link, useParams } from 'react-router-dom';
 import { Footer } from '../../components/Footer/index';
-import { films } from '../../mocks/films';
+import { films } from '../../mock-server/films';
 import { REGEX_ALT } from '../../constants';
 import { createAltText } from '../../utils/createAltText';
 import { FilmCard } from '../../components/FilmCard/index';
