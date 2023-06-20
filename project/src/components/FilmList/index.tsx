@@ -10,7 +10,9 @@ import {Film} from '../../types/film';
 export const FilmList = () => {
   const films = useAppSelector((state) => state.films);
 
-  const [, setActiveCardId] = useState('');
+  //TODO fix this;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [activeCardId, setActiveCardId] = useState('');
   const [countFilms, setCountFilms] = useState(FILM_CARD_COUNT);
 
   const [searchParams] = useSearchParams();
