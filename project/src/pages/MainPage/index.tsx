@@ -6,6 +6,7 @@ import {GenresList} from '../../components/GenresList';
 import { useAppDispatch } from '../../hooks';
 import {fetchFilmsAction} from '../../store/api-action';
 
+// TODO Remove when it's will be finished
 const FilmInformation = {
   Name: 'Shutter',
   Genre: 'comedy',
@@ -32,7 +33,7 @@ export const MainPage = () => {
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-          <GenresList></GenresList>
+          <GenresList />
           <FilmList />
         </section>
         <Footer />

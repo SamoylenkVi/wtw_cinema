@@ -3,7 +3,7 @@ import {AxiosInstance} from 'axios';
 
 import { AppDispatch, State } from '../types/state';
 import { Film } from '../types/film';
-import {API_ROUTE,} from '../constants';
+import {API_ROUTE} from '../constants';
 
 export const fetchFilmsAction = createAsyncThunk<
   Film[],

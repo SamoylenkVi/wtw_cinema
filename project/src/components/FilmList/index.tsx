@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
-import {useLocation} from 'react-router-dom';
+import {useSearchParams} from 'react-router-dom';
 import { FilmCard } from '../FilmCard/index';
-import { DEFAULT_GENRE, FILM_CARD_COUNT } from '../../constants';
+import { DEFAULT_GENRE, FILM_CARD_COUNT, QUERY_PARAM} from '../../constants';
 import { useAppSelector} from '../../hooks';
 import {ShowMoreButton} from '../ShowMoreButton';
 import {Film} from '../../types/film';
@@ -13,17 +13,18 @@ export const FilmList = () => {
   const [, setActiveCardId] = useState('');
   const [countFilms, setCountFilms] = useState(FILM_CARD_COUNT);
 
-  const {search} = useLocation();
-  const genreParams = new URLSearchParams(search).get('genre');
+  const [searchParams] = useSearchParams();
+  const genreParams = searchParams.get(QUERY_PARAM.GENRE);
 
   const filteredFilms = useMemo<Film[]>(() => {
-    if (genreParams === DEFAULT_GENRE) {
+    if (!genreParams || genreParams === DEFAULT_GENRE) {
       return films;
     }
 
     return films.filter((film) => film.genre === genreParams);
   }, [films, genreParams]);
 
+  const isShowMoreButtonVisible = filteredFilms.length > countFilms;
 
   useEffect(() => {
     setCountFilms(FILM_CARD_COUNT);
@@ -38,25 +39,24 @@ export const FilmList = () => {
     setActiveCardId(id);
   };
 
-
   return (
     <>
       <div className="catalog__films-list">
         {
-          filteredFilms.slice(0, countFilms).map((_, index) => (
+          filteredFilms.slice(0, countFilms).map((film) => (
             <FilmCard
-              key={filteredFilms[index].id}
-              name = {filteredFilms[index].name}
-              previewImage = {filteredFilms[index].previewImage}
-              previewVideoLink = {filteredFilms[index].previewVideoLink}
-              id = {filteredFilms[index].id}
+              key={film.id}
+              name = {film.name}
+              previewImage = {film.previewImage}
+              previewVideoLink = {film.previewVideoLink}
+              id = {film.id}
               onMouseEnter={handleMouseEnter}
             />
           ))
         }
       </div>
 
-      {filteredFilms.length > countFilms && <ShowMoreButton onClick={showMoreFilmsHandler}/>}
+      {isShowMoreButtonVisible && <ShowMoreButton onClick={showMoreFilmsHandler}/>}
     </>
   );
 };

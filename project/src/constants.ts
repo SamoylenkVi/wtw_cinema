@@ -30,5 +30,9 @@ export const AUTHORIZATION_STATUS = {
 } as const;
 
 
+export const QUERY_PARAM = {
+  GENRE: 'genre'
+};
+
 type key = keyof typeof AUTHORIZATION_STATUS
 export type AuthorizationStatusType = typeof AUTHORIZATION_STATUS[key];

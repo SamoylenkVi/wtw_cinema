@@ -1,37 +1,40 @@
 import cn from 'classnames';
-import {useState} from 'react';
 import { useSearchParams } from 'react-router-dom';
-import {DEFAULT_GENRE} from '../../constants';
+import {DEFAULT_GENRE, QUERY_PARAM } from '../../constants';
 import { useAppSelector} from '../../hooks';
 
 export const GenresList = () => {
   const genreList = useAppSelector((state) => state.genres);
-  const [currentGenre, setCurrentGenre ] = useState(DEFAULT_GENRE);
-  const [, setGenreParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const selectedGenre = searchParams.get(QUERY_PARAM.GENRE) ?? DEFAULT_GENRE;
 
   const changeGenreHandler = (genre: string) => (
     (evt : React.MouseEvent) => {
       evt.preventDefault();
-      setCurrentGenre(genre);
-      setGenreParams({'genre': genre});
+      setSearchParams({'genre': genre});
     }
   );
+
 
   return (
     <ul className="catalog__genres-list">
       {
-        genreList.map((genre) => (
-          <li key={genre}
-            className = {cn('catalog__genres-item', { 'catalog__genres-item--active': currentGenre === genre})}
-          >
-            <a
-              href='#'
-              onClick={changeGenreHandler(genre)}
-              className="catalog__genres-link"
-            > {genre}
-            </a>
-          </li>
-        ))
+        genreList.map((genre) => {
+          const genreClassName = cn('catalog__genres-item', { 'catalog__genres-item--active': selectedGenre === genre});
+
+          return (
+            <li key={genre}
+              className = { genreClassName }
+            >
+              <a
+                href='#'
+                onClick={changeGenreHandler(genre)}
+                className="catalog__genres-link"
+              > {genre}
+              </a>
+            </li>);
+        })
       }
     </ul>
   );

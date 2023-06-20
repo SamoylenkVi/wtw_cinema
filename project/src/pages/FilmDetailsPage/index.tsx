@@ -11,7 +11,6 @@ import { Logo } from '../../components/Logo';
 
 export const FilmDetailsPage = () => {
   const { id } = useParams<string>();
-
   const film = films.find((item) => item.id === id);
 
   if (!film) {
