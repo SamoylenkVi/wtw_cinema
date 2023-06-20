@@ -1,6 +1,8 @@
+import {Provider} from 'react-redux';
 import { HelmetProvider } from 'react-helmet-async';
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
+import { store } from './store/store';
 import { MainPage } from './pages/MainPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { FilmDetailsPage } from './pages/FilmDetailsPage';
@@ -9,8 +11,8 @@ import { Player } from './components/Player';
 import { Login } from './pages/Login';
 import { PrivateRouter } from './components/PrivateRoute';
 import ScrollToTop from './components/ScrollToTop';
-import { films } from './mocks/films';
 import { APP_ROUTE, AUTHORIZATION_STATUS } from './constants';
+
 
 const ScrollToTopLayout = () => (
   <>
@@ -29,7 +31,7 @@ const router = createBrowserRouter([
       },
       {
         path: APP_ROUTE.Root,
-        element: <MainPage films={films} />,
+        element: <MainPage />,
       },
       {
         path: APP_ROUTE.Login,
@@ -61,7 +63,9 @@ const root = document.getElementById('root');
 if (root){
   ReactDOM.createRoot(root as HTMLDivElement).render(
     <HelmetProvider>
-      <RouterProvider router={router} />,
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
     </HelmetProvider>
   );
 }

@@ -1,19 +1,41 @@
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import {useSearchParams} from 'react-router-dom';
 import { FilmCard } from '../FilmCard/index';
+import { DEFAULT_GENRE, FILM_CARD_COUNT, QUERY_PARAM} from '../../constants';
+import { useAppSelector} from '../../hooks';
+import {ShowMoreButton} from '../ShowMoreButton';
+import {Film} from '../../types/film';
 
-type Film = {
-  id: string;
-  name: string;
-  previewImage: string;
-  previewVideoLink: string;
-}
 
-type FilmListProps = {
-  films: Film[];
-}
+export const FilmList = () => {
+  const films = useAppSelector((state) => state.films);
 
-export const FilmList = ({ films }:FilmListProps) => {
-  const [, setActiveCardId] = useState('');
+  //TODO fix this;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [activeCardId, setActiveCardId] = useState('');
+  const [countFilms, setCountFilms] = useState(FILM_CARD_COUNT);
+
+  const [searchParams] = useSearchParams();
+  const genreParams = searchParams.get(QUERY_PARAM.GENRE);
+
+  const filteredFilms = useMemo<Film[]>(() => {
+    if (!genreParams || genreParams === DEFAULT_GENRE) {
+      return films;
+    }
+
+    return films.filter((film) => film.genre === genreParams);
+  }, [films, genreParams]);
+
+  const isShowMoreButtonVisible = filteredFilms.length > countFilms;
+
+  useEffect(() => {
+    setCountFilms(FILM_CARD_COUNT);
+  }, [genreParams]);
+
+
+  const showMoreFilmsHandler = () => {
+    setCountFilms((prevContFilms) => (prevContFilms + FILM_CARD_COUNT));
+  };
 
   const handleMouseEnter = (id:string) => {
     setActiveCardId(id);
@@ -23,22 +45,20 @@ export const FilmList = ({ films }:FilmListProps) => {
     <>
       <div className="catalog__films-list">
         {
-          films.map((_, index) => (
+          filteredFilms.slice(0, countFilms).map((film) => (
             <FilmCard
-              key={films[index].id}
-              name = {films[index].name}
-              previewImage = {films[index].previewImage}
-              previewVideoLink = {films[index].previewVideoLink}
-              id = {films[index].id}
+              key={film.id}
+              name = {film.name}
+              previewImage = {film.previewImage}
+              previewVideoLink = {film.previewVideoLink}
+              id = {film.id}
               onMouseEnter={handleMouseEnter}
             />
           ))
         }
       </div>
 
-      <div className="catalog__more">
-        <button className="catalog__button" type="button">Show more</button>
-      </div>
+      {isShowMoreButtonVisible && <ShowMoreButton onClick={showMoreFilmsHandler}/>}
     </>
   );
 };
