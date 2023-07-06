@@ -1,23 +1,43 @@
 import { Helmet } from 'react-helmet-async';
+import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Footer } from '../../components/Footer/index';
-import { films } from '../../mock-server/films';
+import { useAppSelector} from '../../hooks';
 import { REGEX_ALT } from '../../constants';
 import { createAltText } from '../../utils/createAltText';
 import { FilmCard } from '../../components/FilmCard/index';
 import { DetailsNavigation } from '../../components/DetailsNavigation/index';
 import { findSimilarFilms } from './helper';
 import { Logo } from '../../components/Logo';
+import { createApi } from '../../services/api';
+import { Film } from '../../types/film';
+
+
+const api = createApi();
 
 export const FilmDetailsPage = () => {
+  const films = useAppSelector((state) => state.films);
+
   const { id } = useParams<string>();
-  const film = films.find((item) => item.id === id);
+  const [film, setFilm] = useState<Film>();
+
+
+  useEffect(() => {
+    if(!id) {
+      return;
+    }
+
+    api.get<Film>(`/films/${id}`).then((response) => {
+      setFilm(response.data);
+    });
+  },[id]);
+
 
   if (!film) {
     return null;
   }
 
-  const { name, previewImage, genre, released } = film;
+  const { name, previewImage, posterImage, genre, released } = film;
 
   const similarFilms = findSimilarFilms(films, genre);
 
@@ -84,7 +104,7 @@ export const FilmDetailsPage = () => {
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={posterImage} alt="The Grand Budapest Hotel poster" width="218" height="327" />
             </div>
 
             <div className="film-card__desc">

@@ -1,14 +1,15 @@
 import { Link, useParams } from 'react-router-dom';
+import { useAppSelector} from '../../hooks';
 import { REGEX_ALT } from '../../constants';
 import { createAltText } from '../../utils/createAltText';
 import { AddReviewForm } from '../../components/AddReviewForm';
-import { films } from '../../mock-server/films';
 import { Logo } from '../../components/Logo';
 
 export const AddReviewPage = () => {
   const { id } = useParams();
+  const films = useAppSelector((state) => state.films);
 
-  const film = films.find((item) => item.id === id);
+  const film = films.find((item) => item.id === Number(id));
 
   if (!film) {
     return null;
