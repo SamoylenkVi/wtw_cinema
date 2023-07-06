@@ -1,6 +1,6 @@
 import axios, {AxiosInstance} from 'axios';
 
-const BASE_URL = 'http://localhost:8080/api';
+const BASE_URL = 'https://12.react.pages.academy/wtw';
 const TIMEOUT = 5000;
 
 export const createApi = (): AxiosInstance => {

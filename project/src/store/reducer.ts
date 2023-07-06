@@ -25,7 +25,7 @@ export const reducer = createReducer(initialState, (builder) => {
     })
 
     .addCase(fetchFilmsAction.fulfilled, (state, action) => {
-      state.films = state.films.concat(action.payload);
+      state.films = action.payload;
       state.genres = createGenreList(state.films);
       state.isFilmsDataLoading = false;
     })
