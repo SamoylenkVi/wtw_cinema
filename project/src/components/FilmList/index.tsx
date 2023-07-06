@@ -4,15 +4,16 @@ import { FilmCard } from '../FilmCard/index';
 import { DEFAULT_GENRE, FILM_CARD_COUNT, QUERY_PARAM} from '../../constants';
 import { useAppSelector} from '../../hooks';
 import {ShowMoreButton} from '../ShowMoreButton';
+import { Loader } from '../Loader';
 import {Film} from '../../types/film';
-
 
 export const FilmList = () => {
   const films = useAppSelector((state) => state.films);
+  const isFilmsLoading = useAppSelector((state) => state.isFilmsDataLoading);
 
   //TODO fix this;
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [activeCardId, setActiveCardId] = useState('');
+  const [activeCardId, setActiveCardId] = useState<number>();
   const [countFilms, setCountFilms] = useState(FILM_CARD_COUNT);
 
   const [searchParams] = useSearchParams();
@@ -37,28 +38,30 @@ export const FilmList = () => {
     setCountFilms((prevContFilms) => (prevContFilms + FILM_CARD_COUNT));
   };
 
-  const handleMouseEnter = (id:string) => {
+  const handleMouseEnter = (id:number) => {
     setActiveCardId(id);
   };
 
   return (
-    <>
-      <div className="catalog__films-list">
-        {
-          filteredFilms.slice(0, countFilms).map((film) => (
-            <FilmCard
-              key={film.id}
-              name = {film.name}
-              previewImage = {film.previewImage}
-              previewVideoLink = {film.previewVideoLink}
-              id = {film.id}
-              onMouseEnter={handleMouseEnter}
-            />
-          ))
-        }
-      </div>
+    isFilmsLoading ? <Loader /> :
+      <>
 
-      {isShowMoreButtonVisible && <ShowMoreButton onClick={showMoreFilmsHandler}/>}
-    </>
+        <div className="catalog__films-list">
+          {
+            filteredFilms.slice(0, countFilms).map((film) => (
+              <FilmCard
+                key={film.id}
+                name = {film.name}
+                previewImage = {film.previewImage}
+                previewVideoLink = {film.previewVideoLink}
+                id = {film.id}
+                onMouseEnter={handleMouseEnter}
+              />
+            ))
+          }
+        </div>
+
+        {isShowMoreButtonVisible && <ShowMoreButton onClick={showMoreFilmsHandler}/>}
+      </>
   );
 };
