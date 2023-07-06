@@ -3,20 +3,20 @@ import { DATA_FORMAT_ATTRIBUTE, DATA_FORMAT_TEXT } from '../../constants';
 import { Comment } from '../../types/comment';
 
 type FilmReviewProps = {
-  comment: Comment;
+  commentData: Comment;
 }
 
-export const FilmReview = ({ comment }:FilmReviewProps) => {
+export const FilmReview = ({ commentData }:FilmReviewProps) => {
   const {
-    user, rating, commentText, date,
-  } = comment;
+    user, rating, comment, date,
+  } = commentData;
 
   const { name } = user;
 
   return (
     <div className="review">
       <blockquote className="review__quote">
-        <p className="review__text">{commentText}</p>
+        <p className="review__text">{comment}</p>
 
         <footer className="review__details">
           <cite className="review__author">{name}</cite>

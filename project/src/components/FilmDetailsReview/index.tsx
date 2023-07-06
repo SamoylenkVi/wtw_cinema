@@ -1,15 +1,30 @@
-import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
 import { FilmReview } from '../FilmReview/index';
-import { Comment } from '../../types/comment';
+import { createApi } from '../../services/api';
+import {Comment} from '../../types/comment';
+
+const api = createApi();
 
 type FilmDetailsReviewProps = {
-  comments: Comment[];
+  id: number;
 }
 
-export const FilmDetailsReview = ({ comments }:FilmDetailsReviewProps) => {
+export const FilmDetailsReview = ({ id }:FilmDetailsReviewProps) => {
+  const [comments, setComments] = useState<Comment[]>();
+
+  useEffect(() => {
+    api.get<Comment[]>(`/comments/${id}`).then((response) => {
+      setComments(response.data);
+    });
+  },[id]);
+
+  if(!comments) {
+    return null;
+  }
+
   const commentComponents = comments.map((comment) => (
     <FilmReview
-      comment={comment} key={comment.id}
+      commentData={comment} key={comment.id}
     />
   ));
 
@@ -23,8 +38,4 @@ export const FilmDetailsReview = ({ comments }:FilmDetailsReviewProps) => {
       </div>
     </div>
   );
-};
-
-FilmDetailsReview.propTypes = {
-  comments: PropTypes.object,
 };

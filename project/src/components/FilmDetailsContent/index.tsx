@@ -1,4 +1,3 @@
-import { comments } from '../../mock-server/comments';
 import { FilmDetailsOverview } from '../FilmDetailsOverview/index';
 import { FilmDetailsInformation } from '../FilmDetailsInformation/index';
 import { FilmDetailsReview } from '../FilmDetailsReview/index';
@@ -12,7 +11,7 @@ type FilmDetailsContentProps = {
 
 export const FilmDetailsContent = ({ film, state }:FilmDetailsContentProps) => {
   const {
-    director, starring, runTime, released, genre, description, rating, scoresCount,
+    director, starring, runTime, released, genre, description, rating, scoresCount, id
   } = film;
 
   switch (state) {
@@ -37,7 +36,7 @@ export const FilmDetailsContent = ({ film, state }:FilmDetailsContentProps) => {
         />
       );
     case NAVIGATION_BUTTONS.REVIEWS:
-      return <FilmDetailsReview comments={comments}/>;
+      return <FilmDetailsReview id={id}/>;
     default:
       return null;
   }
