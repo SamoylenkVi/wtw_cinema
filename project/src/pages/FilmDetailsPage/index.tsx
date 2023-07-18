@@ -1,45 +1,37 @@
 import { Helmet } from 'react-helmet-async';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Footer } from '../../components/Footer/index';
-import { useAppSelector} from '../../hooks';
+import { useAppDispatch, useAppSelector} from '../../hooks';
 import { REGEX_ALT } from '../../constants';
 import { createAltText } from '../../utils/createAltText';
 import { FilmCard } from '../../components/FilmCard/index';
 import { DetailsNavigation } from '../../components/DetailsNavigation/index';
-import { findSimilarFilms } from './helper';
 import { Logo } from '../../components/Logo';
-import { createApi } from '../../services/api';
-import { Film } from '../../types/film';
+import {fetchFilmAction, fetchSimilarFilmsAction} from '../../store/api-action';
 
-
-const api = createApi();
 
 export const FilmDetailsPage = () => {
-  const films = useAppSelector((state) => state.films);
-
+  const dispatch = useAppDispatch();
   const { id } = useParams<string>();
-  const [film, setFilm] = useState<Film>();
-
 
   useEffect(() => {
     if(!id) {
       return;
     }
+    dispatch(fetchFilmAction(id));
+    dispatch(fetchSimilarFilmsAction(id));
 
-    api.get<Film>(`/films/${id}`).then((response) => {
-      setFilm(response.data);
-    });
-  },[id]);
+  }, [id, dispatch]);
 
+  const film = useAppSelector((state) => state.filmDetail);
+  const similarFilms = useAppSelector((state) => state.similarFilmDetails);
 
   if (!film) {
     return null;
   }
 
   const { name, previewImage, posterImage, genre, released } = film;
-
-  const similarFilms = findSimilarFilms(films, genre);
 
   const altText = createAltText(previewImage, REGEX_ALT);
 
@@ -55,7 +47,6 @@ export const FilmDetailsPage = () => {
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
-
 
           <header className="page-header film-card__head">
             <Logo />

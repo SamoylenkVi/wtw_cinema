@@ -19,7 +19,7 @@ export const MainPage = () => {
 
   useEffect(() => {
     dispatch(fetchFilmsAction());
-  }, []);
+  }, [dispatch]);
 
 
   return (

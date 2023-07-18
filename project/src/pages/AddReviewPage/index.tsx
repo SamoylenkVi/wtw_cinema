@@ -1,15 +1,32 @@
+import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { useAppSelector} from '../../hooks';
 import { REGEX_ALT } from '../../constants';
 import { createAltText } from '../../utils/createAltText';
 import { AddReviewForm } from '../../components/AddReviewForm';
 import { Logo } from '../../components/Logo';
+import { useAppSelector, useAppDispatch } from '../../hooks';
+import { fetchFilmAction } from '../../store/api-action';
 
 export const AddReviewPage = () => {
-  const { id } = useParams();
-  const films = useAppSelector((state) => state.films);
 
-  const film = films.find((item) => item.id === Number(id));
+  const dispatch = useAppDispatch();
+  const { id } = useParams();
+  const film = useAppSelector((state) => state.filmDetail);
+
+  useEffect(() => {
+
+    if(!id ) {
+      return;
+    }
+
+    if (film && id === film.id.toString()) {
+      return;
+    }
+
+    dispatch(fetchFilmAction(id));
+
+  },[id, dispatch, film]);
+
 
   if (!film) {
     return null;
@@ -30,14 +47,13 @@ export const AddReviewPage = () => {
 
         <header className="page-header">
           <Logo />
-
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link to={'/films/2'} className="breadcrumbs__link">{name}</Link>
+                { id && <Link to={`/films/${id}/details`} className="breadcrumbs__link">{name}</Link> }
               </li>
               <li className="breadcrumbs__item">
-                <a className="breadcrumbs__link">Add review</a>
+                <Link className="breadcrumbs__link" to={''}>Add review</Link>
               </li>
             </ul>
           </nav>
@@ -53,7 +69,10 @@ export const AddReviewPage = () => {
           <img src={previewImage} alt="The Grand Budapest Hotel poster" width="218" height="327" />
         </div>
       </div>
-      <AddReviewForm />
+      {
+        id && <AddReviewForm id={id}/>
+      }
+
     </section>
   );
 };

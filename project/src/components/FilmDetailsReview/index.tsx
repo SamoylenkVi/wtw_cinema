@@ -1,22 +1,25 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {fetchCommentsAction} from '../../store/api-action';
 import { FilmReview } from '../FilmReview/index';
-import { createApi } from '../../services/api';
-import {Comment} from '../../types/comment';
 
-const api = createApi();
 
 type FilmDetailsReviewProps = {
   id: number;
 }
 
 export const FilmDetailsReview = ({ id }:FilmDetailsReviewProps) => {
-  const [comments, setComments] = useState<Comment[]>();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    api.get<Comment[]>(`/comments/${id}`).then((response) => {
-      setComments(response.data);
-    });
-  },[id]);
+    if(!id) {
+      return;
+    }
+    dispatch(fetchCommentsAction(id));
+
+  }, [id, dispatch]);
+
+  const comments = useAppSelector((state) => state.filmComments);
 
   if(!comments) {
     return null;
