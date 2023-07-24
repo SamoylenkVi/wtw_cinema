@@ -2,6 +2,8 @@ import {Provider} from 'react-redux';
 import { HelmetProvider } from 'react-helmet-async';
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { store } from './store/store';
 import { MainPage } from './pages/MainPage';
 import { NotFoundPage } from './pages/NotFoundPage';
@@ -66,6 +68,7 @@ if (root){
   ReactDOM.createRoot(root as HTMLDivElement).render(
     <HelmetProvider>
       <Provider store={store}>
+        <ToastContainer />
         <RouterProvider router={router} />
       </Provider>
     </HelmetProvider>
