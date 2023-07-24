@@ -3,9 +3,15 @@ import { Film } from '../types/film';
 import { createGenreList } from '../utils/createGenreList';
 import { AUTHORIZATION_STATUS } from '../constants';
 import { AuthorizationStatusType } from '../constants';
-import { fetchCommentsAction, fetchFilmAction, fetchFilmsAction, fetchSimilarFilmsAction } from './api-action';
 import { requireAuthorization } from './action';
 import { Comment } from '../types/comment';
+import {
+  fetchCommentsAction,
+  fetchFilmAction,
+  fetchFilmsAction,
+  fetchSimilarFilmsAction
+} from './api-action';
+
 
 type InitialState = {
   films: Film[];

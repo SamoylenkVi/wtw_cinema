@@ -4,5 +4,5 @@ import { AuthorizationStatusType } from '../constants';
 
 export const requireAuthorization = createAction<AuthorizationStatusType>('user/requireAuthorization');
 
-export const redirectToRoute = createAction('login/redirectToRoute');
+export const redirectToRoute = createAction('redirectToRoute');
 

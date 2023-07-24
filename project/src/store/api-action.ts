@@ -9,6 +9,7 @@ import { API_ROUTE, AUTHORIZATION_STATUS } from '../constants';
 import { Comment } from '../types/comment';
 import {dropToken, saveToken} from '../services/token';
 import {redirectToRoute, requireAuthorization} from './action';
+import { NewCommentData } from '../types/new-comment';
 
 
 export const fetchFilmsAction = createAsyncThunk<
@@ -102,5 +103,20 @@ export const fetchLogoutAction = createAsyncThunk<
     await api.delete(API_ROUTE.Logout);
     dropToken();
     dispatch(requireAuthorization(AUTHORIZATION_STATUS.NoAuth));
+  },
+);
+
+export const fetchAddNewComment = createAsyncThunk<
+  void,
+  NewCommentData,
+ {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchNewComment',
+  async ({ comment, rating, id }, {dispatch, extra: api }) => {
+    await api.post(`${API_ROUTE.Comments}/${id}`, {comment, rating});
+    dispatch(redirectToRoute());
   },
 );
