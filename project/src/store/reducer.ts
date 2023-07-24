@@ -5,7 +5,7 @@ import { AUTHORIZATION_STATUS } from '../constants';
 import { AuthorizationStatusType } from '../constants';
 import { fetchCommentsAction, fetchFilmAction, fetchFilmsAction, fetchSimilarFilmsAction } from './api-action';
 import { requireAuthorization } from './action';
-import {Comment} from '../types/comment';
+import { Comment } from '../types/comment';
 
 type InitialState = {
   films: Film[];

@@ -10,16 +10,15 @@ import { AddReviewPage } from './pages/AddReviewPage';
 import { Player } from './components/Player';
 import { Login } from './pages/Login';
 import { PrivateRouter } from './components/PrivateRoute';
-import ScrollToTop from './components/ScrollToTop';
-import { APP_ROUTE, AUTHORIZATION_STATUS } from './constants';
+import { APP_ROUTE } from './constants';
+import { useAuthCheck, useScrollToTop} from './hooks';
 
+const ScrollToTopLayout = () => {
+  useScrollToTop();
+  useAuthCheck();
+  return ( <Outlet />);
+};
 
-const ScrollToTopLayout = () => (
-  <>
-    <ScrollToTop />
-    <Outlet />
-  </>
-);
 
 const router = createBrowserRouter([
   {
@@ -40,18 +39,21 @@ const router = createBrowserRouter([
       {
         path: APP_ROUTE.Film,
         element:
-        <PrivateRouter authorizationStatus= {AUTHORIZATION_STATUS.Auth}>
+        <PrivateRouter>
           <FilmDetailsPage />
         </PrivateRouter>,
       },
       {
         path: APP_ROUTE.Review,
-        element: <AddReviewPage />,
+        element:
+        <PrivateRouter>
+          <AddReviewPage />
+        </PrivateRouter>,
       },
       {
         path: APP_ROUTE.Player,
         element:
-        <PrivateRouter authorizationStatus= {AUTHORIZATION_STATUS.NoAuth}>
+        <PrivateRouter>
           <Player/>
         </PrivateRouter>,
       },

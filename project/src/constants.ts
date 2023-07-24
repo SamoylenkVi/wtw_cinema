@@ -21,7 +21,9 @@ export const APP_ROUTE = {
 export const API_ROUTE = {
   Films: '/films',
   Comments: '/comments',
-};
+  Login: '/login',
+  Logout: '/logout',
+} as const;
 
 export const AUTHORIZATION_STATUS = {
   Auth: 'AUTH',
