@@ -5,7 +5,7 @@ import '../style.scss';
 export const Logout = () => {
   const dispatch = useAppDispatch();
 
-  const signOutHandler = (evt : React.MouseEvent) => {
+  const handleSignOutButtonClick = (evt : React.MouseEvent<HTMLButtonElement>) => {
     evt.preventDefault();
     dispatch(fetchLogoutAction());
   };
@@ -18,7 +18,7 @@ export const Logout = () => {
         </div>
       </li>
       <li className="user-block__item">
-        <button onClick={signOutHandler} className="user-block__button user-block__button--logout">Sign out</button>
+        <button onClick={handleSignOutButtonClick} className="user-block__button user-block__button--logout">Sign out</button>
 
       </li>
     </>

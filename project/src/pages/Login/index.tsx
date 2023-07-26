@@ -16,7 +16,7 @@ export const Login = () => {
     dispatch(fetchLoginAction(loginData));
   };
 
-  const submitLoginFormHandle = (evt: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmitLoginForm = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
     if (loginRef.current !== null && passwordRef.current !== null) {
@@ -37,7 +37,7 @@ export const Login = () => {
       </header>
 
       <div className="sign-in user-page__content">
-        <form onSubmit={submitLoginFormHandle} action="#" className="sign-in__form">
+        <form onSubmit={handleSubmitLoginForm} action="#" className="sign-in__form">
           <div className="sign-in__fields">
             <div className="sign-in__field">
               <input

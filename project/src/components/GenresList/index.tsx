@@ -9,7 +9,7 @@ export const GenresList = () => {
 
   const selectedGenre = searchParams.get(QUERY_PARAM.GENRE) ?? DEFAULT_GENRE;
 
-  const changeGenreHandler = (genre: string) => (
+  const handleChangeGenre = (genre: string) => (
     (evt : React.MouseEvent) => {
       evt.preventDefault();
       setSearchParams({'genre': genre});
@@ -29,7 +29,7 @@ export const GenresList = () => {
             >
               <a
                 href='#'
-                onClick={changeGenreHandler(genre)}
+                onClick={handleChangeGenre(genre)}
                 className="catalog__genres-link"
               > {genre}
               </a>

@@ -34,7 +34,7 @@ export const FilmList = () => {
   }, [genreParams]);
 
 
-  const showMoreFilmsHandler = () => {
+  const handleShowMoreFilmsClick = () => {
     setCountFilms((prevContFilms) => (prevContFilms + FILM_CARD_COUNT));
   };
 
@@ -61,7 +61,7 @@ export const FilmList = () => {
           }
         </div>
 
-        {isShowMoreButtonVisible && <ShowMoreButton onClick={showMoreFilmsHandler}/>}
+        {isShowMoreButtonVisible && <ShowMoreButton onClick={handleShowMoreFilmsClick}/>}
       </>
   );
 };
