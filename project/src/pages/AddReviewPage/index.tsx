@@ -5,7 +5,7 @@ import { createAltText } from '../../utils/createAltText';
 import { AddReviewForm } from '../../components/AddReviewForm';
 import { Logo } from '../../components/Logo';
 import { useAppSelector, useAppDispatch } from '../../hooks';
-import { fetchFilmAction } from '../../store/api-action';
+import { fetchFilm } from '../../store/api-action';
 
 export const AddReviewPage = () => {
 
@@ -23,7 +23,7 @@ export const AddReviewPage = () => {
       return;
     }
 
-    dispatch(fetchFilmAction(id));
+    dispatch(fetchFilm(id));
 
   },[id, dispatch, film]);
 

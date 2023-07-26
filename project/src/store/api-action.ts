@@ -12,7 +12,7 @@ import {redirectToRoute, requireAuthorization} from './action';
 import { NewCommentData } from '../types/new-comment';
 
 
-export const fetchFilmsAction = createAsyncThunk<
+export const fetchFilms = createAsyncThunk<
   Film[],
   void,
  {
@@ -27,7 +27,7 @@ export const fetchFilmsAction = createAsyncThunk<
   },
 );
 
-export const fetchFilmAction = createAsyncThunk<
+export const fetchFilm = createAsyncThunk<
   Film,
   string,
  {
@@ -42,7 +42,7 @@ export const fetchFilmAction = createAsyncThunk<
   },
 );
 
-export const fetchSimilarFilmsAction = createAsyncThunk<
+export const fetchSimilarFilms = createAsyncThunk<
   Film[],
   string,
  {
@@ -57,7 +57,7 @@ export const fetchSimilarFilmsAction = createAsyncThunk<
   },
 );
 
-export const fetchCommentsAction = createAsyncThunk<
+export const fetchComments = createAsyncThunk<
   Comment[],
   number,
  {
@@ -72,7 +72,7 @@ export const fetchCommentsAction = createAsyncThunk<
   },
 );
 
-export const fetchLoginAction = createAsyncThunk<
+export const fetchLogin = createAsyncThunk<
   void,
   LoginData,
  {
@@ -90,7 +90,7 @@ export const fetchLoginAction = createAsyncThunk<
 );
 
 
-export const fetchLogoutAction = createAsyncThunk<
+export const fetchLogout = createAsyncThunk<
   void,
   void,
  {

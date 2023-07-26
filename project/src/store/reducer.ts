@@ -6,10 +6,10 @@ import { AuthorizationStatusType } from '../constants';
 import { requireAuthorization } from './action';
 import { Comment } from '../types/comment';
 import {
-  fetchCommentsAction,
-  fetchFilmAction,
-  fetchFilmsAction,
-  fetchSimilarFilmsAction
+  fetchComments,
+  fetchFilm,
+  fetchFilms,
+  fetchSimilarFilms
 } from './api-action';
 
 
@@ -37,31 +37,31 @@ const initialState: InitialState = {
 
 export const reducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(fetchFilmsAction.pending, (state) => {
+    .addCase(fetchFilms.pending, (state) => {
       state.isFilmsDataLoading = true;
       state.hasError = false;
     })
 
-    .addCase(fetchFilmsAction.fulfilled, (state, action) => {
+    .addCase(fetchFilms.fulfilled, (state, action) => {
       state.films = action.payload;
       state.genres = createGenreList(state.films);
       state.isFilmsDataLoading = false;
     })
 
-    .addCase(fetchFilmsAction.rejected, (state) => {
+    .addCase(fetchFilms.rejected, (state) => {
       state.isFilmsDataLoading = false;
       state.hasError = true;
     })
 
-    .addCase(fetchFilmAction.fulfilled, (state, action) => {
+    .addCase(fetchFilm.fulfilled, (state, action) => {
       state.filmDetail = action.payload;
     })
 
-    .addCase(fetchSimilarFilmsAction.fulfilled, (state, action) => {
+    .addCase(fetchSimilarFilms.fulfilled, (state, action) => {
       state.similarFilmDetails = action.payload;
     })
 
-    .addCase(fetchCommentsAction.fulfilled, (state, action) => {
+    .addCase(fetchComments.fulfilled, (state, action) => {
       state.filmComments = action.payload;
     })
 

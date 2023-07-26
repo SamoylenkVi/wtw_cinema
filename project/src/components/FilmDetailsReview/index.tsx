@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {fetchCommentsAction} from '../../store/api-action';
+import {fetchComments} from '../../store/api-action';
 import { FilmReview } from '../FilmReview/index';
 
 
@@ -15,7 +15,7 @@ export const FilmDetailsReview = ({ id }:FilmDetailsReviewProps) => {
     if(!id) {
       return;
     }
-    dispatch(fetchCommentsAction(id));
+    dispatch(fetchComments(id));
 
   }, [id, dispatch]);
 

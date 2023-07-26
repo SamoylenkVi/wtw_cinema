@@ -1,5 +1,5 @@
 import { useAppDispatch } from '../../../hooks';
-import { fetchLogoutAction} from '../../../store/api-action';
+import { fetchLogout} from '../../../store/api-action';
 import '../style.scss';
 
 export const Logout = () => {
@@ -7,7 +7,7 @@ export const Logout = () => {
 
   const handleSignOutButtonClick = (evt : React.MouseEvent<HTMLButtonElement>) => {
     evt.preventDefault();
-    dispatch(fetchLogoutAction());
+    dispatch(fetchLogout());
   };
 
   return (

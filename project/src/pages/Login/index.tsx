@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { Footer } from '../../components/Footer';
 import { Logo } from '../../components/Logo';
 import { useAppDispatch } from '../../hooks';
-import {fetchLoginAction} from '../../store/api-action';
+import {fetchLogin} from '../../store/api-action';
 import { LoginData } from '../../types/login';
 
 
@@ -13,7 +13,7 @@ export const Login = () => {
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
   const onSubmit = (loginData: LoginData) => {
-    dispatch(fetchLoginAction(loginData));
+    dispatch(fetchLogin(loginData));
   };
 
   const handleSubmitLoginForm = (evt: React.FormEvent<HTMLFormElement>) => {

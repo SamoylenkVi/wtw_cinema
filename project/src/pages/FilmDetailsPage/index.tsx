@@ -8,7 +8,7 @@ import { createAltText } from '../../utils/createAltText';
 import { FilmCard } from '../../components/FilmCard/index';
 import { DetailsNavigation } from '../../components/DetailsNavigation/index';
 import { Logo } from '../../components/Logo';
-import {fetchFilmAction, fetchSimilarFilmsAction} from '../../store/api-action';
+import {fetchFilm, fetchSimilarFilms} from '../../store/api-action';
 
 
 export const FilmDetailsPage = () => {
@@ -19,8 +19,8 @@ export const FilmDetailsPage = () => {
     if(!id) {
       return;
     }
-    dispatch(fetchFilmAction(id));
-    dispatch(fetchSimilarFilmsAction(id));
+    dispatch(fetchFilm(id));
+    dispatch(fetchSimilarFilms(id));
 
   }, [id, dispatch]);
 
