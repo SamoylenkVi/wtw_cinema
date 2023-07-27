@@ -1,7 +1,8 @@
 import { useRef } from 'react';
 import { Footer } from '../../components/Footer';
 import { Logo } from '../../components/Logo';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import {selectIsLoginSubmit} from '../../selectors';
 import {fetchLogin} from '../../store/api-action';
 import { LoginData } from '../../types/login';
 
@@ -11,6 +12,8 @@ export const Login = () => {
 
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
+
+  const isLoginSubmit = useAppSelector(selectIsLoginSubmit);
 
   const onSubmit = (loginData: LoginData) => {
     dispatch(fetchLogin(loginData));
@@ -63,7 +66,7 @@ export const Login = () => {
             </div>
           </div>
           <div className="sign-in__submit">
-            <button className="sign-in__btn" type="submit">Sign in</button>
+            <button disabled={isLoginSubmit} className="sign-in__btn" type="submit">Sign in</button>
           </div>
         </form>
       </div>

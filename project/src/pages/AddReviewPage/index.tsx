@@ -6,15 +6,15 @@ import { AddReviewForm } from '../../components/AddReviewForm';
 import { Logo } from '../../components/Logo';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { fetchFilm } from '../../store/api-action';
+import {selectFilmDetails} from '../../selectors';
 
 export const AddReviewPage = () => {
 
   const dispatch = useAppDispatch();
   const { id } = useParams();
-  const film = useAppSelector((state) => state.filmDetail);
+  const film = useAppSelector(selectFilmDetails);
 
   useEffect(() => {
-
     if(!id ) {
       return;
     }
@@ -70,7 +70,7 @@ export const AddReviewPage = () => {
         </div>
       </div>
       {
-        id && <AddReviewForm id={id}/>
+        !!id && <AddReviewForm id={id}/>
       }
 
     </section>

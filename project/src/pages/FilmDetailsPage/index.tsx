@@ -9,6 +9,7 @@ import { FilmCard } from '../../components/FilmCard/index';
 import { DetailsNavigation } from '../../components/DetailsNavigation/index';
 import { Logo } from '../../components/Logo';
 import {fetchFilm, fetchSimilarFilms} from '../../store/api-action';
+import {selectFilmDetails, selectSimilarFilms} from '../../selectors';
 
 
 export const FilmDetailsPage = () => {
@@ -24,8 +25,8 @@ export const FilmDetailsPage = () => {
 
   }, [id, dispatch]);
 
-  const film = useAppSelector((state) => state.filmDetail);
-  const similarFilms = useAppSelector((state) => state.similarFilmDetails);
+  const film = useAppSelector(selectFilmDetails);
+  const similarFilms = useAppSelector(selectSimilarFilms);
 
   if (!film) {
     return null;

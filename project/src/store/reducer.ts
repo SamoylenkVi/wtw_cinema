@@ -9,6 +9,7 @@ import {
   fetchComments,
   fetchFilm,
   fetchFilms,
+  fetchLogin,
   fetchSimilarFilms
 } from './api-action';
 
@@ -20,6 +21,7 @@ type InitialState = {
   similarFilmDetails: Film[];
   genres: string[];
   isFilmsDataLoading: boolean;
+  isLoginSubmit:boolean;
   hasError: boolean;
   authorizationStatus: AuthorizationStatusType;
 }
@@ -31,6 +33,7 @@ const initialState: InitialState = {
   similarFilmDetails: [],
   genres: ['All genres'],
   isFilmsDataLoading: false,
+  isLoginSubmit:false,
   hasError: false,
   authorizationStatus: AUTHORIZATION_STATUS.Unknown,
 };
@@ -63,6 +66,18 @@ export const reducer = createReducer(initialState, (builder) => {
 
     .addCase(fetchComments.fulfilled, (state, action) => {
       state.filmComments = action.payload;
+    })
+
+    .addCase(fetchLogin.pending, (state) => {
+      state.isLoginSubmit = true;
+    })
+
+    .addCase(fetchLogin.fulfilled, (state) => {
+      state.isLoginSubmit = false;
+    })
+
+    .addCase(fetchLogin.rejected, (state) => {
+      state.isLoginSubmit = false;
     })
 
     .addCase(requireAuthorization, (state, action) => {

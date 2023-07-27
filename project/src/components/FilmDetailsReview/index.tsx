@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import {useAppDispatch, useAppSelector} from '../../hooks';
+import {selectComments} from '../../selectors';
 import {fetchComments} from '../../store/api-action';
 import { FilmReview } from '../FilmReview/index';
 
@@ -12,14 +13,11 @@ export const FilmDetailsReview = ({ id }:FilmDetailsReviewProps) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if(!id) {
-      return;
-    }
     dispatch(fetchComments(id));
 
   }, [id, dispatch]);
 
-  const comments = useAppSelector((state) => state.filmComments);
+  const comments = useAppSelector(selectComments);
 
   if(!comments) {
     return null;

@@ -6,10 +6,11 @@ import { useAppSelector} from '../../hooks';
 import {ShowMoreButton} from '../ShowMoreButton';
 import { Loader } from '../Loader';
 import {Film} from '../../types/film';
+import {selectFilms, selectIsFilmsDataLoading} from '../../selectors';
 
 export const FilmList = () => {
-  const films = useAppSelector((state) => state.films);
-  const isFilmsLoading = useAppSelector((state) => state.isFilmsDataLoading);
+  const films = useAppSelector(selectFilms);
+  const isFilmsLoading = useAppSelector(selectIsFilmsDataLoading);
 
   //TODO fix this;
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
