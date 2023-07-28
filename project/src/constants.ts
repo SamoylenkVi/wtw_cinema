@@ -13,6 +13,7 @@ export const APP_ROUTE = {
   Root: '/',
   Login: '/login',
   Film: '/films/:id/:currentInformation',
+  FilmDetails: '/films/:id/details',
   Review: '/films/:id/review',
   Player: '/player/:id',
   NotFound: '*'

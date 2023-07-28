@@ -5,7 +5,7 @@ import browserHistory from '../../utils/browserHistory';
 
 type Reducer = ReturnType<typeof reducer>;
 
-export const redirectM: Middleware<unknown, Reducer> =
+export const redirect: Middleware<unknown, Reducer> =
  (_store) =>
    (next) =>
      (action: PayloadAction<string>) => {

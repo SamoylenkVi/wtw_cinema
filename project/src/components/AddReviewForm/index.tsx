@@ -3,7 +3,7 @@ import { RATING_FILM } from '../../constants';
 import { useAppDispatch } from '../../hooks';
 import { fetchAddNewComment } from '../../store/api-action';
 
-const ratings = Array.from({ length: RATING_FILM }, (_, index) => index + 1).reverse();
+const ratings = Array.from({ length: RATING_FILM }, (_, index) => RATING_FILM - index);
 
 
 type AddReviewFormProps = {
@@ -24,7 +24,7 @@ export const AddReviewForm = ({id}:AddReviewFormProps) => {
     dispatch(fetchAddNewComment({
       comment: review.commentText,
       rating: review.rating,
-      id: id,
+      id
     }));
 
   };

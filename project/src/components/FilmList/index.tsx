@@ -14,7 +14,7 @@ export const FilmList = () => {
 
   //TODO fix this;
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [activeCardId, setActiveCardId] = useState<number>();
+  const [activeCardId, setActiveCardId] = useState<Film['id']>();
   const [countFilms, setCountFilms] = useState(FILM_CARD_COUNT);
 
   const [searchParams] = useSearchParams();
@@ -43,26 +43,28 @@ export const FilmList = () => {
     setActiveCardId(id);
   };
 
+  if (isFilmsLoading) {
+    return <Loader />;
+  }
+
   return (
-    isFilmsLoading ? <Loader /> :
-      <>
+    <>
+      <div className="catalog__films-list">
+        {
+          filteredFilms.slice(0, countFilms).map((film) => (
+            <FilmCard
+              key={film.id}
+              name = {film.name}
+              previewImage = {film.previewImage}
+              previewVideoLink = {film.previewVideoLink}
+              id = {film.id}
+              onMouseEnter={handleMouseEnter}
+            />
+          ))
+        }
+      </div>
 
-        <div className="catalog__films-list">
-          {
-            filteredFilms.slice(0, countFilms).map((film) => (
-              <FilmCard
-                key={film.id}
-                name = {film.name}
-                previewImage = {film.previewImage}
-                previewVideoLink = {film.previewVideoLink}
-                id = {film.id}
-                onMouseEnter={handleMouseEnter}
-              />
-            ))
-          }
-        </div>
-
-        {isShowMoreButtonVisible && <ShowMoreButton onClick={handleShowMoreFilmsClick}/>}
-      </>
+      {isShowMoreButtonVisible && <ShowMoreButton onClick={handleShowMoreFilmsClick}/>}
+    </>
   );
 };

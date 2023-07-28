@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { REGEX_ALT } from '../../constants';
+import { Link, useParams, generatePath } from 'react-router-dom';
+import { APP_ROUTE, REGEX_ALT } from '../../constants';
 import { createAltText } from '../../utils/createAltText';
 import { AddReviewForm } from '../../components/AddReviewForm';
 import { Logo } from '../../components/Logo';
@@ -34,6 +34,7 @@ export const AddReviewPage = () => {
     return null;
   }
 
+
   const { name, previewImage } = film;
 
   const altText = createAltText(previewImage, REGEX_ALT);
@@ -52,7 +53,7 @@ export const AddReviewPage = () => {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                { id && <Link to={`/films/${id}/details`} className="breadcrumbs__link">{name}</Link> }
+                { id && <Link to={generatePath(APP_ROUTE.FilmDetails, { id })} className="breadcrumbs__link">{name}</Link> }
               </li>
               <li className="breadcrumbs__item">
                 <a className="breadcrumbs__link">Add review</a>
