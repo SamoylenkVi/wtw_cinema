@@ -13,6 +13,7 @@ export const APP_ROUTE = {
   Root: '/',
   Login: '/login',
   Film: '/films/:id/:currentInformation',
+  FilmDetails: '/films/:id/details',
   Review: '/films/:id/review',
   Player: '/player/:id',
   NotFound: '*'
@@ -21,7 +22,9 @@ export const APP_ROUTE = {
 export const API_ROUTE = {
   Films: '/films',
   Comments: '/comments',
-};
+  Login: '/login',
+  Logout: '/logout',
+} as const;
 
 export const AUTHORIZATION_STATUS = {
   Auth: 'AUTH',

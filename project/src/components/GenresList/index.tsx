@@ -2,14 +2,15 @@ import cn from 'classnames';
 import { useSearchParams } from 'react-router-dom';
 import {DEFAULT_GENRE, QUERY_PARAM } from '../../constants';
 import { useAppSelector} from '../../hooks';
+import {selectGenres} from '../../selectors';
 
 export const GenresList = () => {
-  const genreList = useAppSelector((state) => state.genres);
+  const genreList = useAppSelector(selectGenres);
   const [searchParams, setSearchParams] = useSearchParams();
 
   const selectedGenre = searchParams.get(QUERY_PARAM.GENRE) ?? DEFAULT_GENRE;
 
-  const changeGenreHandler = (genre: string) => (
+  const handleChangeGenre = (genre: string) => (
     (evt : React.MouseEvent) => {
       evt.preventDefault();
       setSearchParams({'genre': genre});
@@ -29,7 +30,7 @@ export const GenresList = () => {
             >
               <a
                 href='#'
-                onClick={changeGenreHandler(genre)}
+                onClick={handleChangeGenre(genre)}
                 className="catalog__genres-link"
               > {genre}
               </a>

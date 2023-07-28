@@ -1,25 +1,43 @@
 import { Helmet } from 'react-helmet-async';
+import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Footer } from '../../components/Footer/index';
-import { films } from '../../mock-server/films';
+import { useAppDispatch, useAppSelector} from '../../hooks';
 import { REGEX_ALT } from '../../constants';
 import { createAltText } from '../../utils/createAltText';
 import { FilmCard } from '../../components/FilmCard/index';
 import { DetailsNavigation } from '../../components/DetailsNavigation/index';
-import { findSimilarFilms } from './helper';
 import { Logo } from '../../components/Logo';
+import {fetchFilm, fetchSimilarFilms} from '../../store/api-action';
+import {selectFilmDetails, selectSimilarFilms} from '../../selectors';
+
 
 export const FilmDetailsPage = () => {
+  const dispatch = useAppDispatch();
   const { id } = useParams<string>();
-  const film = films.find((item) => item.id === id);
+
+  useEffect(() => {
+    if(!id) {
+      return;
+    }
+    const filmPromise = dispatch(fetchFilm(id));
+    const similarFilmPromise = dispatch(fetchSimilarFilms(id));
+
+    return () => {
+      filmPromise.abort();
+      similarFilmPromise.abort();
+    };
+
+  }, [id, dispatch]);
+
+  const film = useAppSelector(selectFilmDetails);
+  const similarFilms = useAppSelector(selectSimilarFilms);
 
   if (!film) {
     return null;
   }
 
-  const { name, previewImage, genre, released } = film;
-
-  const similarFilms = findSimilarFilms(films, genre);
+  const { name, previewImage, posterImage, genre, released } = film;
 
   const altText = createAltText(previewImage, REGEX_ALT);
 
@@ -35,7 +53,6 @@ export const FilmDetailsPage = () => {
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
-
 
           <header className="page-header film-card__head">
             <Logo />
@@ -84,7 +101,7 @@ export const FilmDetailsPage = () => {
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={posterImage} alt="The Grand Budapest Hotel poster" width="218" height="327" />
             </div>
 
             <div className="film-card__desc">

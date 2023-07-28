@@ -1,13 +1,33 @@
 import React, { useState } from 'react';
 import { RATING_FILM } from '../../constants';
+import { useAppDispatch } from '../../hooks';
+import { fetchAddNewComment } from '../../store/api-action';
 
-const ratings = Array.from({ length: RATING_FILM }, (_, index) => index + 1);
+const ratings = Array.from({ length: RATING_FILM }, (_, index) => RATING_FILM - index);
 
-export const AddReviewForm = () => {
-  const [, setReview] = useState({
+
+type AddReviewFormProps = {
+  id:string;
+}
+
+export const AddReviewForm = ({id}:AddReviewFormProps) => {
+  const dispatch = useAppDispatch();
+
+  const [review, setReview] = useState({
     rating: '',
     commentText: '',
   });
+
+  const handleCreateComment = (evt: React.FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+
+    dispatch(fetchAddNewComment({
+      comment: review.commentText,
+      rating: review.rating,
+      id
+    }));
+
+  };
 
   const handleRatingFilm = (evt: React.ChangeEvent<HTMLInputElement> ) => {
     const target = evt.target as HTMLInputElement;
@@ -23,7 +43,7 @@ export const AddReviewForm = () => {
 
   return (
     <div className="add-review">
-      <form action="#" className="add-review__form">
+      <form action="#" onSubmit={handleCreateComment} className="add-review__form">
         <div className="rating">
           <div className="rating__stars">
             {

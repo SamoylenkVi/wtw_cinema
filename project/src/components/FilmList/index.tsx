@@ -4,15 +4,17 @@ import { FilmCard } from '../FilmCard/index';
 import { DEFAULT_GENRE, FILM_CARD_COUNT, QUERY_PARAM} from '../../constants';
 import { useAppSelector} from '../../hooks';
 import {ShowMoreButton} from '../ShowMoreButton';
+import { Loader } from '../Loader';
 import {Film} from '../../types/film';
-
+import {selectFilms, selectIsFilmsDataLoading} from '../../selectors';
 
 export const FilmList = () => {
-  const films = useAppSelector((state) => state.films);
+  const films = useAppSelector(selectFilms);
+  const isFilmsLoading = useAppSelector(selectIsFilmsDataLoading);
 
   //TODO fix this;
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [activeCardId, setActiveCardId] = useState('');
+  const [activeCardId, setActiveCardId] = useState<Film['id']>();
   const [countFilms, setCountFilms] = useState(FILM_CARD_COUNT);
 
   const [searchParams] = useSearchParams();
@@ -33,13 +35,17 @@ export const FilmList = () => {
   }, [genreParams]);
 
 
-  const showMoreFilmsHandler = () => {
+  const handleShowMoreFilmsClick = () => {
     setCountFilms((prevContFilms) => (prevContFilms + FILM_CARD_COUNT));
   };
 
-  const handleMouseEnter = (id:string) => {
+  const handleMouseEnter = (id:number) => {
     setActiveCardId(id);
   };
+
+  if (isFilmsLoading) {
+    return <Loader />;
+  }
 
   return (
     <>
@@ -58,7 +64,7 @@ export const FilmList = () => {
         }
       </div>
 
-      {isShowMoreButtonVisible && <ShowMoreButton onClick={showMoreFilmsHandler}/>}
+      {isShowMoreButtonVisible && <ShowMoreButton onClick={handleShowMoreFilmsClick}/>}
     </>
   );
 };

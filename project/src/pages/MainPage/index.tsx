@@ -4,7 +4,7 @@ import { FilmList } from '../../components/FilmList';
 import { Footer } from '../../components/Footer';
 import {GenresList} from '../../components/GenresList';
 import { useAppDispatch } from '../../hooks';
-import {fetchFilmsAction} from '../../store/api-action';
+import {fetchFilms} from '../../store/api-action';
 
 // TODO Remove when it's will be finished
 const FilmInformation = {
@@ -18,8 +18,11 @@ export const MainPage = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchFilmsAction());
-  }, []);
+    const filmsPromise = dispatch(fetchFilms());
+
+    return () => filmsPromise.abort();
+
+  }, [dispatch]);
 
 
   return (

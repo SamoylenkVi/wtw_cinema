@@ -882,7 +882,7 @@ main {
 
 .film-nav__link:hover::after {
   display: block; }
-    
+
 .film-nav__link.film-nav__link--active {
   font-weight: bold; }
 
@@ -1456,4 +1456,14 @@ display: block; }
     align-items: center;
     flex-direction: column;
     height: 100vh; }
-  
+
+  .loader-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding: 20px 0;
+  }
+  .loader-wrapper h2 {
+    margin: 0;
+    padding: 20px 0 10px;
+  }

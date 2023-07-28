@@ -1,18 +1,39 @@
-import { Link, useParams } from 'react-router-dom';
-import { REGEX_ALT } from '../../constants';
+import { useEffect } from 'react';
+import { Link, useParams, generatePath } from 'react-router-dom';
+import { APP_ROUTE, REGEX_ALT } from '../../constants';
 import { createAltText } from '../../utils/createAltText';
 import { AddReviewForm } from '../../components/AddReviewForm';
-import { films } from '../../mock-server/films';
 import { Logo } from '../../components/Logo';
+import { useAppSelector, useAppDispatch } from '../../hooks';
+import { fetchFilm } from '../../store/api-action';
+import {selectFilmDetails} from '../../selectors';
 
 export const AddReviewPage = () => {
-  const { id } = useParams();
 
-  const film = films.find((item) => item.id === id);
+  const dispatch = useAppDispatch();
+  const { id } = useParams();
+  const film = useAppSelector(selectFilmDetails);
+
+  useEffect(() => {
+    if(!id ) {
+      return;
+    }
+
+    if (film && id === film.id.toString()) {
+      return;
+    }
+
+    const filmPromise = dispatch(fetchFilm(id));
+
+    return () => filmPromise.abort();
+
+  },[id, dispatch, film]);
+
 
   if (!film) {
     return null;
   }
+
 
   const { name, previewImage } = film;
 
@@ -29,11 +50,10 @@ export const AddReviewPage = () => {
 
         <header className="page-header">
           <Logo />
-
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link to={'/films/2'} className="breadcrumbs__link">{name}</Link>
+                { id && <Link to={generatePath(APP_ROUTE.FilmDetails, { id })} className="breadcrumbs__link">{name}</Link> }
               </li>
               <li className="breadcrumbs__item">
                 <a className="breadcrumbs__link">Add review</a>
@@ -52,7 +72,10 @@ export const AddReviewPage = () => {
           <img src={previewImage} alt="The Grand Budapest Hotel poster" width="218" height="327" />
         </div>
       </div>
-      <AddReviewForm />
+      {
+        !!id && <AddReviewForm id={id}/>
+      }
+
     </section>
   );
 };

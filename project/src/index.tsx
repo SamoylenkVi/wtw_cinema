@@ -2,6 +2,8 @@ import {Provider} from 'react-redux';
 import { HelmetProvider } from 'react-helmet-async';
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { store } from './store/store';
 import { MainPage } from './pages/MainPage';
 import { NotFoundPage } from './pages/NotFoundPage';
@@ -10,16 +12,15 @@ import { AddReviewPage } from './pages/AddReviewPage';
 import { Player } from './components/Player';
 import { Login } from './pages/Login';
 import { PrivateRouter } from './components/PrivateRoute';
-import ScrollToTop from './components/ScrollToTop';
-import { APP_ROUTE, AUTHORIZATION_STATUS } from './constants';
+import { APP_ROUTE } from './constants';
+import { useAuthCheck, useScrollToTop} from './hooks';
 
+const ScrollToTopLayout = () => {
+  useScrollToTop();
+  useAuthCheck();
+  return ( <Outlet />);
+};
 
-const ScrollToTopLayout = () => (
-  <>
-    <ScrollToTop />
-    <Outlet />
-  </>
-);
 
 const router = createBrowserRouter([
   {
@@ -40,18 +41,21 @@ const router = createBrowserRouter([
       {
         path: APP_ROUTE.Film,
         element:
-        <PrivateRouter authorizationStatus= {AUTHORIZATION_STATUS.Auth}>
+        <PrivateRouter>
           <FilmDetailsPage />
         </PrivateRouter>,
       },
       {
         path: APP_ROUTE.Review,
-        element: <AddReviewPage />,
+        element:
+        <PrivateRouter>
+          <AddReviewPage />
+        </PrivateRouter>,
       },
       {
         path: APP_ROUTE.Player,
         element:
-        <PrivateRouter authorizationStatus= {AUTHORIZATION_STATUS.NoAuth}>
+        <PrivateRouter>
           <Player/>
         </PrivateRouter>,
       },
@@ -64,6 +68,7 @@ if (root){
   ReactDOM.createRoot(root as HTMLDivElement).render(
     <HelmetProvider>
       <Provider store={store}>
+        <ToastContainer />
         <RouterProvider router={router} />
       </Provider>
     </HelmetProvider>

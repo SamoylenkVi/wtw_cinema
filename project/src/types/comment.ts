@@ -3,6 +3,6 @@ export type Comment = {
   id: number;
   user: User;
   rating: number;
-  commentText: string;
+  comment: string;
   date: Date;
 };

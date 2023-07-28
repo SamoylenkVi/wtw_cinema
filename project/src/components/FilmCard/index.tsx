@@ -12,8 +12,8 @@ type FilmCardProps = {
   name: string;
   previewImage: string;
   previewVideoLink: string;
-  id: string;
-  onMouseEnter?: (id: string) => void;
+  id: number;
+  onMouseEnter?: (id: number) => void;
 }
 
 export const FilmCard = ({
