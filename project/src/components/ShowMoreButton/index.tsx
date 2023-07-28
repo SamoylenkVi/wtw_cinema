@@ -4,13 +4,13 @@ type ShowMoreButtonProps = {
 
 export const ShowMoreButton = ({onClick}:ShowMoreButtonProps) => {
 
-  const handleClickButton = () => {
+  const handleButtonClick = () => {
     onClick();
   };
 
   return (
     <div className="catalog__more">
-      <button onClick ={handleClickButton} className="catalog__button" type="button">Show more</button>
+      <button onClick ={handleButtonClick} className="catalog__button" type="button">Show more</button>
     </div>
   );
 };
