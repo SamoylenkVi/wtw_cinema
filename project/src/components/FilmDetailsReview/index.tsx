@@ -13,7 +13,9 @@ export const FilmDetailsReview = ({ id }:FilmDetailsReviewProps) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchComments(id));
+    const commentsPromise = dispatch(fetchComments(id));
+
+    return () => commentsPromise.abort();
 
   }, [id, dispatch]);
 
@@ -25,7 +27,8 @@ export const FilmDetailsReview = ({ id }:FilmDetailsReviewProps) => {
 
   const commentComponents = comments.map((comment) => (
     <FilmReview
-      commentData={comment} key={comment.id}
+      commentData={comment}
+      key={comment.id}
     />
   ));
 

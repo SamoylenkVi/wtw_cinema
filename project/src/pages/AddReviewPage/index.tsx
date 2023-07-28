@@ -23,7 +23,9 @@ export const AddReviewPage = () => {
       return;
     }
 
-    dispatch(fetchFilm(id));
+    const filmPromise = dispatch(fetchFilm(id));
+
+    return () => filmPromise.abort();
 
   },[id, dispatch, film]);
 
@@ -53,7 +55,7 @@ export const AddReviewPage = () => {
                 { id && <Link to={`/films/${id}/details`} className="breadcrumbs__link">{name}</Link> }
               </li>
               <li className="breadcrumbs__item">
-                <Link className="breadcrumbs__link" to={''}>Add review</Link>
+                <a className="breadcrumbs__link">Add review</a>
               </li>
             </ul>
           </nav>

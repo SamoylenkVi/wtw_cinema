@@ -18,7 +18,10 @@ export const MainPage = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchFilms());
+    const filmsPromise = dispatch(fetchFilms());
+
+    return () => filmsPromise.abort();
+
   }, [dispatch]);
 
 

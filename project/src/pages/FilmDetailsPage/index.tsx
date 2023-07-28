@@ -20,8 +20,13 @@ export const FilmDetailsPage = () => {
     if(!id) {
       return;
     }
-    dispatch(fetchFilm(id));
-    dispatch(fetchSimilarFilms(id));
+    const filmPromise = dispatch(fetchFilm(id));
+    const similarFilmPromise = dispatch(fetchSimilarFilms(id));
+
+    return () => {
+      filmPromise.abort();
+      similarFilmPromise.abort();
+    };
 
   }, [id, dispatch]);
 
