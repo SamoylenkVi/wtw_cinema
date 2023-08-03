@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {selectComments} from '../../selectors';
+import {selectComments} from '../../store/film-data/selectors';
 import {fetchComments} from '../../store/api-action';
 import { FilmReview } from '../FilmReview/index';
 

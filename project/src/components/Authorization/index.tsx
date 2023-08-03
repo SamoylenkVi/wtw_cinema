@@ -3,7 +3,7 @@ import { Logout } from './components/logout';
 import { Login } from './components/login';
 import {useAppSelector} from '../../hooks';
 import { AUTHORIZATION_STATUS } from '../../constants';
-import { selectAuthorizationStatus } from '../../selectors';
+import { selectAuthorizationStatus } from '../../store/login/selectors';
 
 
 export const Authorization = () => {

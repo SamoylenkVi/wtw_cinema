@@ -3,7 +3,7 @@ import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 import {useLocation} from 'react-router-dom';
 import {AUTHORIZATION_STATUS} from '../constants';
 import {getToken} from '../services/token';
-import {requireAuthorization} from '../store/action';
+import { requireAuthorization } from '../store/login/login';
 import type {State, AppDispatch} from '../types/state';
 
 export const useAppDispatch = () => useDispatch<AppDispatch>();

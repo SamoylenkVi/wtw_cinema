@@ -9,7 +9,7 @@ import { FilmCard } from '../../components/FilmCard/index';
 import { DetailsNavigation } from '../../components/DetailsNavigation/index';
 import { Logo } from '../../components/Logo';
 import {fetchFilm, fetchSimilarFilms} from '../../store/api-action';
-import {selectFilmDetails, selectSimilarFilms} from '../../selectors';
+import {selectFilmDetails, selectSimilarFilms} from '../../store/film-data/selectors';
 
 
 export const FilmDetailsPage = () => {

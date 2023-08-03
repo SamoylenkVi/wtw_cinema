@@ -37,5 +37,11 @@ export const QUERY_PARAM = {
   GENRE: 'genre'
 };
 
+export const NAME_SPACE = {
+  FilmsData: 'FILMS_DATA',
+  FilmData: 'FILM_DATA',
+  Login: 'USER',
+} as const;
+
 type key = keyof typeof AUTHORIZATION_STATUS
 export type AuthorizationStatusType = typeof AUTHORIZATION_STATUS[key];

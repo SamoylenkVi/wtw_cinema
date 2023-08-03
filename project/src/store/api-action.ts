@@ -1,6 +1,5 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
-
 import { AppDispatch, State } from '../types/state';
 import { Film } from '../types/film';
 import { LoginData } from '../types/login';
@@ -8,7 +7,8 @@ import { UserData } from '../types/user-data';
 import { API_ROUTE, AUTHORIZATION_STATUS } from '../constants';
 import { Comment } from '../types/comment';
 import {dropToken, saveToken} from '../services/token';
-import {redirectToRoute, requireAuthorization} from './action';
+import { redirectToRoute } from './action';
+import { requireAuthorization } from './login/login';
 import { NewCommentData } from '../types/new-comment';
 
 
