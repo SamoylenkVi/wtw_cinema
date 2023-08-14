@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { NAME_SPACE } from '../../constants';
 import { FilmsData } from '../../types/state';
 import { createGenreList } from '../../utils/createGenreList';
-import { fetchFilms } from '../api-action';
+import { fetchAddFilmToFavorite, fetchFilms } from '../api-action';
 
 const initialState: FilmsData = {
   films: [],
@@ -31,6 +31,15 @@ export const filmsData = createSlice({
       .addCase(fetchFilms.rejected, (state) => {
         state.isFilmsDataLoading = false;
         state.hasError = true;
+      })
+
+      .addCase(fetchAddFilmToFavorite.fulfilled, (state, action) => {
+        const film = state.films.find((item) => item.id === action.payload.id);
+
+        if (film) {
+          film.isFavorite = action.payload.isFavorite;
+        }
+
       });
   }
 });

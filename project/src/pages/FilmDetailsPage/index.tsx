@@ -10,6 +10,8 @@ import { DetailsNavigation } from '../../components/DetailsNavigation/index';
 import { Logo } from '../../components/Logo';
 import {fetchFilm, fetchSimilarFilms} from '../../store/api-action';
 import {selectFilmDetails, selectSimilarFilms} from '../../store/film-data/selectors';
+import { AddFilmFavoriteButton } from '../../components/AddFilmFavoriteButton';
+import {Authorization} from '../../components/Authorization';
 
 
 export const FilmDetailsPage = () => {
@@ -37,6 +39,10 @@ export const FilmDetailsPage = () => {
     return null;
   }
 
+  if (!id) {
+    return null;
+  }
+
   const { name, previewImage, posterImage, genre, released } = film;
 
   const altText = createAltText(previewImage, REGEX_ALT);
@@ -56,17 +62,7 @@ export const FilmDetailsPage = () => {
 
           <header className="page-header film-card__head">
             <Logo />
-
-            <ul className="user-block">
-              <li className="user-block__item">
-                <div className="user-block__avatar">
-                  <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-                </div>
-              </li>
-              <li className="user-block__item">
-                <Link to={'/login'} className="user-block__link">Sign out</Link>
-              </li>
-            </ul>
+            <Authorization />
           </header>
 
           <div className="film-card__wrap">
@@ -84,12 +80,7 @@ export const FilmDetailsPage = () => {
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
+                <AddFilmFavoriteButton id={id}/>
                 {(id !== undefined) && (
                   <Link to={`/films/${id}/review`} className="btn film-card__button">Add review</Link>
                 )}
