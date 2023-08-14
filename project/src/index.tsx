@@ -6,6 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { store } from './store/store';
 import { MainPage } from './pages/MainPage';
+import { MyListPage } from './pages/MyListPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { FilmDetailsPage } from './pages/FilmDetailsPage';
 import { AddReviewPage } from './pages/AddReviewPage';
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: APP_ROUTE.Root,
         element: <MainPage />,
+      },
+      {
+        path: APP_ROUTE.MyList,
+        element: <MyListPage />,
       },
       {
         path: APP_ROUTE.Login,
