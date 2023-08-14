@@ -10,8 +10,13 @@ export type FilmsData = {
   hasError: boolean;
 };
 
+export type FavoriteFilmsData = {
+  favoriteFilms: Film[];
+}
+
 export type FilmData = {
   filmDetail: Film | null;
+  promoFilm: Film | null;
   filmComments: Comment[];
   similarFilmDetails: Film[];
 };

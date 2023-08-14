@@ -42,6 +42,21 @@ export const fetchFilm = createAsyncThunk<
   },
 );
 
+export const fetchPromoFilm = createAsyncThunk<
+  Film,
+  void,
+ {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchPromoFilm',
+  async (params, { extra: api }) => {
+    const { data } = await api.get<Film>(API_ROUTE.PromoFilm);
+    return data;
+  },
+);
+
 export const fetchSimilarFilms = createAsyncThunk<
   Film[],
   string,
@@ -118,5 +133,38 @@ export const fetchAddNewComment = createAsyncThunk<
   async ({ comment, rating, id }, {dispatch, extra: api }) => {
     await api.post(`${API_ROUTE.Comments}/${id}`, {comment, rating});
     dispatch(redirectToRoute());
+  },
+);
+
+export const fetchAddFilmToFavorite = createAsyncThunk<
+  Film,
+  {
+    id: string;
+    status: number;
+  },
+ {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchAddFilmToFavorite',
+  async ({ id, status }, {extra: api }) => {
+    const { data } = await api.post<Film>(`${API_ROUTE.FavoriteFilm}/${id}/${status}`);
+    return data;
+  },
+);
+
+export const fetchFavoritesFilms = createAsyncThunk<
+  Film[],
+  void,
+ {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchFavoritesFilm',
+  async (params, { extra: api }) => {
+    const { data } = await api.get<Film[]>(API_ROUTE.FavoriteFilm);
+    return data;
   },
 );

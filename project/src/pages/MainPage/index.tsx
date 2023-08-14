@@ -6,14 +6,6 @@ import {GenresList} from '../../components/GenresList';
 import { useAppDispatch } from '../../hooks';
 import {fetchFilms} from '../../store/api-action';
 
-// TODO Remove when it's will be finished
-const FilmInformation = {
-  Name: 'Shutter',
-  Genre: 'comedy',
-  ReleaseDate: 2015,
-} as const;
-
-
 export const MainPage = () => {
   const dispatch = useAppDispatch();
 
@@ -27,11 +19,7 @@ export const MainPage = () => {
 
   return (
     <>
-      <FilmCardMain
-        name= {FilmInformation.Name}
-        genre={FilmInformation.Genre}
-        releaseDate={FilmInformation.ReleaseDate}
-      />
+      <FilmCardMain/>
 
       <div className="page-content">
         <section className="catalog">
