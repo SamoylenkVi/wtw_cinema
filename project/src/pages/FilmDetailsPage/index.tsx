@@ -12,6 +12,7 @@ import {fetchFilm, fetchSimilarFilms} from '../../store/api-action';
 import {selectFilmDetails, selectSimilarFilms} from '../../store/film-data/selectors';
 import { AddFilmFavoriteButton } from '../../components/AddFilmFavoriteButton';
 import {Authorization} from '../../components/Authorization';
+import {PlayFilmButton} from '../../components/PlayFilmButton/intex';
 
 
 export const FilmDetailsPage = () => {
@@ -74,12 +75,7 @@ export const FilmDetailsPage = () => {
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </button>
+                <PlayFilmButton id={Number(id)}/>
                 <AddFilmFavoriteButton id={id}/>
                 {(id !== undefined) && (
                   <Link to={`/films/${id}/review`} className="btn film-card__button">Add review</Link>

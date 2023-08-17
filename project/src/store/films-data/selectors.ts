@@ -7,15 +7,15 @@ export const selectIsFilmsDataLoading = (state:State) => state.FILMS_DATA.isFilm
 
 export const selectGenres = (state:State) => state.FILMS_DATA.genres;
 
-const selectFilmsIsFavoriteByFilmId = createSelector(
+const selectFilmByFilmId = createSelector(
   selectFilms,
   (state: State, id: string) => Number(id),
   (films, id) => {
     const filmById = films.find((film) => film.id === id);
-    return filmById?.isFavorite ?? null;
+    return filmById ?? null;
   }
 );
 
-export const createSelectFilmsIsFavoriteByFilmId = (id: string) =>
-  (state: State) => selectFilmsIsFavoriteByFilmId(state, id);
+export const createSelectFilmByFilmId = (id: string) =>
+  (state: State) => selectFilmByFilmId(state, id);
 

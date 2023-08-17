@@ -7,6 +7,7 @@ import { Authorization } from '../Authorization';
 import { Logo } from '../Logo';
 import { createAltText } from '../../utils/createAltText';
 import {REGEX_ALT} from '../../constants';
+import {PlayFilmButton} from '../PlayFilmButton/intex';
 
 export const FilmCardMain = () => {
   const dispatch = useAppDispatch();
@@ -55,12 +56,7 @@ export const FilmCardMain = () => {
             </p>
 
             <div className="film-card__buttons">
-              <button className="btn btn--play film-card__button" type="button">
-                <svg viewBox="0 0 19 19" width="19" height="19">
-                  <use xlinkHref="#play-s"></use>
-                </svg>
-                <span>Play</span>
-              </button>
+              <PlayFilmButton id={promoFilm.id}/>
               <AddFilmFavoriteButton id={String(promoFilm.id)} />
             </div>
 

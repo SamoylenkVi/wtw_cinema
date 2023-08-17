@@ -10,7 +10,7 @@ import { MyListPage } from './pages/MyListPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { FilmDetailsPage } from './pages/FilmDetailsPage';
 import { AddReviewPage } from './pages/AddReviewPage';
-import { Player } from './components/Player';
+// import { Player } from './components/Player';
 import { Login } from './pages/Login';
 import { PrivateRouter } from './components/PrivateRoute';
 import { APP_ROUTE } from './constants';
@@ -37,7 +37,10 @@ const router = createBrowserRouter([
       },
       {
         path: APP_ROUTE.MyList,
-        element: <MyListPage />,
+        element:
+        <PrivateRouter>
+          <MyListPage />
+        </PrivateRouter>,
       },
       {
         path: APP_ROUTE.Login,
@@ -45,10 +48,7 @@ const router = createBrowserRouter([
       },
       {
         path: APP_ROUTE.Film,
-        element:
-        <PrivateRouter>
-          <FilmDetailsPage />
-        </PrivateRouter>,
+        element: <FilmDetailsPage />,
       },
       {
         path: APP_ROUTE.Review,
@@ -57,13 +57,13 @@ const router = createBrowserRouter([
           <AddReviewPage />
         </PrivateRouter>,
       },
-      {
-        path: APP_ROUTE.Player,
-        element:
-        <PrivateRouter>
-          <Player/>
-        </PrivateRouter>,
-      },
+      // {
+      //   path: APP_ROUTE.Player,
+      //   element:
+      //   <PrivateRouter>
+      //     <Player/>
+      //   </PrivateRouter>,
+      // },
     ]
   }
 ]);
