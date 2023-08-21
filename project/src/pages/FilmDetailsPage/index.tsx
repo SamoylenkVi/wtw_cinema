@@ -40,10 +40,6 @@ export const FilmDetailsPage = () => {
     return null;
   }
 
-  if (!id) {
-    return null;
-  }
-
   const { name, previewImage, posterImage, genre, released } = film;
 
   const altText = createAltText(previewImage, REGEX_ALT);
@@ -75,10 +71,12 @@ export const FilmDetailsPage = () => {
               </p>
 
               <div className="film-card__buttons">
-                <PlayFilmButton id={Number(id)}/>
-                <AddFilmFavoriteButton id={id}/>
                 {(id !== undefined) && (
-                  <Link to={`/films/${id}/review`} className="btn film-card__button">Add review</Link>
+                  <>
+                    <PlayFilmButton id={Number(id)}/>
+                    <AddFilmFavoriteButton id={id} />
+                    <Link to={`/films/${id}/review`} className="btn film-card__button">Add review</Link>
+                  </>
                 )}
               </div>
             </div>

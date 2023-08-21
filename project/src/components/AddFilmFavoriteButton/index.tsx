@@ -10,8 +10,8 @@ type AddFilmFavoriteButtonProps = {
 export const AddFilmFavoriteButton = ({id}:AddFilmFavoriteButtonProps) => {
   const dispatch = useAppDispatch();
 
-  const selectIsFilmFavorite = createSelectFilmByFilmId(id);
-  const film = useAppSelector(selectIsFilmFavorite);
+  const selectFilmByFilmId = createSelectFilmByFilmId(id);
+  const film = useAppSelector(selectFilmByFilmId);
 
   const handleAddFilmFavorite = () => {
     const status = Number(!film?.isFavorite);

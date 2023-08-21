@@ -42,7 +42,7 @@ export const Player = ({ handlePlayerFilm, id}:PlayerProps) => {
       video?.removeEventListener('durationchange', updateDuration);
     };
 
-  }, [videoRef]);
+  }, []);
 
 
   const handleExitFilm = () => {
