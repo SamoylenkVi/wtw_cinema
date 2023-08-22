@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { Footer } from '../../components/Footer';
 import { Logo } from '../../components/Logo';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import {selectIsLoginSubmit} from '../../selectors';
+import {selectIsLoginSubmit} from '../../store/login/selectors';
 import {fetchLogin} from '../../store/api-action';
 import { LoginData } from '../../types/login';
 

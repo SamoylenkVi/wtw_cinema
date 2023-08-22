@@ -9,12 +9,15 @@ import { FilmCard } from '../../components/FilmCard/index';
 import { DetailsNavigation } from '../../components/DetailsNavigation/index';
 import { Logo } from '../../components/Logo';
 import {fetchFilm, fetchSimilarFilms} from '../../store/api-action';
-import {selectFilmDetails, selectSimilarFilms} from '../../selectors';
+import {selectFilmDetails, selectSimilarFilms} from '../../store/film-data/selectors';
+import { AddFilmFavoriteButton } from '../../components/AddFilmFavoriteButton';
+import {Authorization} from '../../components/Authorization';
+import {PlayFilmButton} from '../../components/PlayFilmButton/intex';
 
 
 export const FilmDetailsPage = () => {
   const dispatch = useAppDispatch();
-  const { id } = useParams<string>();
+  const { id } = useParams() as { id: string };
 
   useEffect(() => {
     if(!id) {
@@ -56,17 +59,7 @@ export const FilmDetailsPage = () => {
 
           <header className="page-header film-card__head">
             <Logo />
-
-            <ul className="user-block">
-              <li className="user-block__item">
-                <div className="user-block__avatar">
-                  <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-                </div>
-              </li>
-              <li className="user-block__item">
-                <Link to={'/login'} className="user-block__link">Sign out</Link>
-              </li>
-            </ul>
+            <Authorization />
           </header>
 
           <div className="film-card__wrap">
@@ -78,21 +71,9 @@ export const FilmDetailsPage = () => {
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </button>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
-                {(id !== undefined) && (
-                  <Link to={`/films/${id}/review`} className="btn film-card__button">Add review</Link>
-                )}
+                <PlayFilmButton id={Number(id)}/>
+                <AddFilmFavoriteButton id={id} />
+                <Link to={`/films/${id}/review`} className="btn film-card__button">Add review</Link>
               </div>
             </div>
           </div>

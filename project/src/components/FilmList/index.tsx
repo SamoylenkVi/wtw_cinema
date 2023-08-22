@@ -6,7 +6,7 @@ import { useAppSelector} from '../../hooks';
 import {ShowMoreButton} from '../ShowMoreButton';
 import { Loader } from '../Loader';
 import {Film} from '../../types/film';
-import {selectFilms, selectIsFilmsDataLoading} from '../../selectors';
+import {selectFilms, selectIsFilmsDataLoading} from '../../store/films-data/selectors';
 
 export const FilmList = () => {
   const films = useAppSelector(selectFilms);

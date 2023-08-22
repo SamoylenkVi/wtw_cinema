@@ -12,6 +12,7 @@ export const DEFAULT_GENRE = 'All genres';
 export const APP_ROUTE = {
   Root: '/',
   Login: '/login',
+  MyList: '/my-list',
   Film: '/films/:id/:currentInformation',
   FilmDetails: '/films/:id/details',
   Review: '/films/:id/review',
@@ -21,6 +22,8 @@ export const APP_ROUTE = {
 
 export const API_ROUTE = {
   Films: '/films',
+  FavoriteFilm: '/favorite',
+  PromoFilm: '/promo',
   Comments: '/comments',
   Login: '/login',
   Logout: '/logout',
@@ -36,6 +39,13 @@ export const AUTHORIZATION_STATUS = {
 export const QUERY_PARAM = {
   GENRE: 'genre'
 };
+
+export const NAME_SPACE = {
+  FavoriteFilmsData: 'FAVORITE_FILMS_DATA',
+  FilmsData: 'FILMS_DATA',
+  FilmData: 'FILM_DATA',
+  Login: 'USER',
+} as const;
 
 type key = keyof typeof AUTHORIZATION_STATUS
 export type AuthorizationStatusType = typeof AUTHORIZATION_STATUS[key];

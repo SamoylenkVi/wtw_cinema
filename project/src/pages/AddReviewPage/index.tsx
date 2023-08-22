@@ -6,7 +6,7 @@ import { AddReviewForm } from '../../components/AddReviewForm';
 import { Logo } from '../../components/Logo';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { fetchFilm } from '../../store/api-action';
-import {selectFilmDetails} from '../../selectors';
+import {selectFilmDetails} from '../../store/film-data/selectors';
 
 export const AddReviewPage = () => {
 

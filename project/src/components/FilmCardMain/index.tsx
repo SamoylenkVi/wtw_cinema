@@ -1,56 +1,69 @@
-import {Authorization} from '../Authorization';
-import {Logo} from '../Logo';
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchFavoritesFilms, fetchPromoFilm } from '../../store/api-action';
+import {selectPromoFilm} from '../../store/film-data/selectors';
+import {AddFilmFavoriteButton} from '../AddFilmFavoriteButton';
+import { Authorization } from '../Authorization';
+import { Logo } from '../Logo';
+import { createAltText } from '../../utils/createAltText';
+import {REGEX_ALT} from '../../constants';
+import {PlayFilmButton} from '../PlayFilmButton/intex';
 
-type FilmCardMainProps = {
-  name: string;
-  genre: string;
-  releaseDate: number;
-}
+export const FilmCardMain = () => {
+  const dispatch = useAppDispatch();
 
-export const FilmCardMain = ({name, genre, releaseDate}: FilmCardMainProps) => (
-  <section className="film-card">
-    <div className="film-card__bg">
-      <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
-    </div>
+  useEffect(() => {
+    const favoriteFilmsPromise = dispatch(fetchFavoritesFilms());
+    const promoFilmPromise = dispatch(fetchPromoFilm());
 
-    <h1 className="visually-hidden">WTW</h1>
+    return () => {
+      favoriteFilmsPromise.abort();
+      promoFilmPromise.abort();
+    };
 
-    <header className="page-header film-card__head">
-      <Logo />
-      <Authorization />
-    </header>
+  }, [dispatch]);
 
-    <div className="film-card__wrap">
-      <div className="film-card__info">
-        <div className="film-card__poster">
-          <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
-        </div>
+  const promoFilm = useAppSelector(selectPromoFilm);
 
-        <div className="film-card__desc">
-          <h2 className="film-card__title">{name}</h2>
-          <p className="film-card__meta">
-            <span className="film-card__genre">{genre}</span>
-            <span className="film-card__year">{releaseDate}</span>
-          </p>
+  if(!promoFilm) {
+    return null;
+  }
 
-          <div className="film-card__buttons">
-            <button className="btn btn--play film-card__button" type="button">
-              <svg viewBox="0 0 19 19" width="19" height="19">
-                <use xlinkHref="#play-s"></use>
-              </svg>
-              <span>Play</span>
-            </button>
-            <button className="btn btn--list film-card__button" type="button">
-              <svg viewBox="0 0 19 20" width="19" height="20">
-                <use xlinkHref="#add"></use>
-              </svg>
-              <span>My list</span>
-              <span className="film-card__count">9</span>
-            </button>
+  return (
+    <section className="film-card">
+      <div className="film-card__bg">
+        <img src={promoFilm.posterImage} alt={createAltText(promoFilm.posterImage, REGEX_ALT)} />
+      </div>
+
+      <h1 className="visually-hidden">WTW</h1>
+
+      <header className="page-header film-card__head">
+        <Logo />
+        <Authorization />
+      </header>
+
+      <div className="film-card__wrap">
+        <div className="film-card__info">
+          <div className="film-card__poster">
+            <img src={promoFilm.previewImage} alt={createAltText(promoFilm.previewImage, REGEX_ALT)} width="218" height="327" />
+          </div>
+
+          <div className="film-card__desc">
+            <h2 className="film-card__title">{promoFilm.name}</h2>
+            <p className="film-card__meta">
+              <span className="film-card__genre">{promoFilm.genre}</span>
+              <span className="film-card__year">{promoFilm.released}</span>
+            </p>
+
+            <div className="film-card__buttons">
+              <PlayFilmButton id={promoFilm.id}/>
+              <AddFilmFavoriteButton id={String(promoFilm.id)} />
+            </div>
+
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-);
+  );
+};

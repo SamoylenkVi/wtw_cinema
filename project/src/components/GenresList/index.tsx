@@ -2,7 +2,7 @@ import cn from 'classnames';
 import { useSearchParams } from 'react-router-dom';
 import {DEFAULT_GENRE, QUERY_PARAM } from '../../constants';
 import { useAppSelector} from '../../hooks';
-import {selectGenres} from '../../selectors';
+import { selectGenres } from '../../store/films-data/selectors';
 
 export const GenresList = () => {
   const genreList = useAppSelector(selectGenres);
