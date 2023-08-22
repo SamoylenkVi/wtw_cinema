@@ -17,7 +17,7 @@ import {PlayFilmButton} from '../../components/PlayFilmButton/intex';
 
 export const FilmDetailsPage = () => {
   const dispatch = useAppDispatch();
-  const { id } = useParams<string>();
+  const { id } = useParams() as { id: string };
 
   useEffect(() => {
     if(!id) {
@@ -71,13 +71,9 @@ export const FilmDetailsPage = () => {
               </p>
 
               <div className="film-card__buttons">
-                {(id !== undefined) && (
-                  <>
-                    <PlayFilmButton id={Number(id)}/>
-                    <AddFilmFavoriteButton id={id} />
-                    <Link to={`/films/${id}/review`} className="btn film-card__button">Add review</Link>
-                  </>
-                )}
+                <PlayFilmButton id={Number(id)}/>
+                <AddFilmFavoriteButton id={id} />
+                <Link to={`/films/${id}/review`} className="btn film-card__button">Add review</Link>
               </div>
             </div>
           </div>
