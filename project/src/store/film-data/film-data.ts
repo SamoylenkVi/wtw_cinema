@@ -4,7 +4,7 @@ import { FilmData } from '../../types/state';
 import {fetchAddFilmToFavorite, fetchComments, fetchFilm, fetchPromoFilm, fetchSimilarFilms} from '../api-action';
 
 
-const initialState:FilmData = {
+export const initialState:FilmData = {
   filmDetail: null,
   promoFilm: null,
   filmComments: [],
@@ -44,4 +44,6 @@ export const filmData = createSlice({
       });
   }
 });
+
+export {fetchFilm, fetchSimilarFilms, fetchPromoFilm, fetchComments, fetchAddFilmToFavorite};
 
