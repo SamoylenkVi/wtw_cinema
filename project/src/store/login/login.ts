@@ -3,7 +3,7 @@ import { AuthorizationStatusType, AUTHORIZATION_STATUS, NAME_SPACE } from '../..
 import { LoginState } from '../../types/state';
 import {fetchLogin} from '../api-action';
 
-const initialState:LoginState = {
+export const initialState:LoginState = {
   isLoginSubmit:false,
   authorizationStatus: AUTHORIZATION_STATUS.Unknown,
 };
@@ -36,3 +36,5 @@ export const login = createSlice({
 
 
 export const { requireAuthorization } = login.actions;
+export {fetchLogin};
+
