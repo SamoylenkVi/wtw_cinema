@@ -50,6 +50,7 @@ export const Login = () => {
                 placeholder="Email address"
                 name="user-email"
                 id="user-email"
+                data-testid="login"
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
             </div>
@@ -61,12 +62,13 @@ export const Login = () => {
                 placeholder="Password"
                 name="user-password"
                 id="user-password"
+                data-testid="password"
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
             </div>
           </div>
           <div className="sign-in__submit">
-            <button disabled={isLoginSubmit} className="sign-in__btn" type="submit">Sign in</button>
+            <button data-testid="submit-form" disabled={isLoginSubmit} className="sign-in__btn" type="submit">Sign in</button>
           </div>
         </form>
       </div>
